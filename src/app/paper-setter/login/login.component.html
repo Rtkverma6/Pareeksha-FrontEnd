@@ -1,0 +1,20 @@
+<h2>Login Details </h2> <br>
+<div *ngIf="invalidLogin" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> {{jwtToken}} </strong>
+  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="loginUser" (ngSubmit)="collectData()">
+
+    <div class="form-group">
+        <label for="userName">E-mail</label>
+        <input type="email" class="form-control" id="userName" placeholder="Enter E-mail" formControlName="userName" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter Password" formControlName="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!loginUser.valid" >Login</button>
+</form>

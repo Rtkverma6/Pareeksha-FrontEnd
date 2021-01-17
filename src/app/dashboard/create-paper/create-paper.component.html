@@ -1,0 +1,72 @@
+<h2>Paper Details </h2>
+<div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong> Paper created Successfully!!. <a href="/dashboard/question/insert"> Insert Questions </a> </strong>
+  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="createPaper" (ngSubmit)="collectData()">
+  <div class="form-group">
+    <label for="paperName">Paper Name</label>
+    <input type="text" class="form-control" id="paperName" placeholder="Enter Paper Name" formControlName="paperName" required>
+    <div *ngIf="paperName.invalid && (paperName.dirty || paperName.touched)" class="alert alert-danger">
+      <div *ngIf="paperName.errors.required"> Paper Name is required. </div>
+      <div *ngIf="paperName.errors.maxlength"> Max Length is 20 </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="paperSubject">Paper Subject</label>
+    <input type="text" class="form-control" id="paperSubject" placeholder="Enter Subject Name" formControlName="paperSubject">
+    <div *ngIf="paperSubject.invalid && (paperSubject.dirty || paperSubject.touched)" class="alert alert-danger">
+      <div *ngIf="paperSubject.errors.required"> Subject Name is required. </div>
+      <div *ngIf="paperSubject.errors.maxlength"> Max Length is 20 </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="startDate">Start Date</label>
+    <input type="datetime-local" class="form-control" id="startDate" formControlName="startDate">
+    <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+      <div *ngIf="startDate.errors.required"> Start Date is required. </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="endDate">End Date</label>
+    <input type="datetime-local" class="form-control" id="endDate" formControlName="endDate">
+    <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
+      <div *ngIf="endDate.errors.required"> End Date is required. </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="paperPassword">Paper Password</label>
+    <input type="password" class="form-control" id="paperPassword" placeholder="Enter password" formControlName="paperPassword">
+    <div *ngIf="paperPassword.invalid && (paperPassword.dirty || paperPassword.touched)" class="alert alert-danger">
+      <div *ngIf="paperPassword.errors.required"> Password is required. </div>
+      <div *ngIf="paperPassword.errors.maxlength"> Maximum length required is 10. </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="difficultyLevel">Difficulty Level</label>
+    <input type="text" class="form-control" id="difficultyLevel" placeholder="Enter difficulty level" formControlName="difficultyLevel">
+    <div *ngIf="difficultyLevel.invalid && (difficultyLevel.dirty || difficultyLevel.touched)" class="alert alert-danger">
+      <div *ngIf="difficultyLevel.errors.required"> Difficulty Level is required. </div>
+      <div *ngIf="difficultyLevel.errors.maxlength"> Maximum length required is 12. </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="duration">Duration</label>
+    <input type="time" class="form-control" id="duration" formControlName="duration">
+    <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="alert alert-danger">
+      <div *ngIf="duration.errors.required"> Duration is required. </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!createPaper.valid">Create</button>
+</form>
+
