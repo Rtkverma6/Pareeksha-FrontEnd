@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddChoicesComponent } from './add-choices.component';
+import { PageNotFoundComponent } from './page-not-found.component';
 
-describe('AddChoicesComponent', () => {
-  let component: AddChoicesComponent;
-  let fixture: ComponentFixture<AddChoicesComponent>;
+describe('PageNotFoundComponent', () => {
+  let component: PageNotFoundComponent;
+  let fixture: ComponentFixture<PageNotFoundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddChoicesComponent ]
+      declarations: [ PageNotFoundComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddChoicesComponent);
+    fixture = TestBed.createComponent(PageNotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

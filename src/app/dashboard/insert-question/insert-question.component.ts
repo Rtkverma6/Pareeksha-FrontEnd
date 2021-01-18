@@ -7,11 +7,23 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-insert-question',
   templateUrl: './insert-question.component.html',
-  styleUrls: ['./insert-question.component.css']
+  styleUrls: ['./insert-question.component.css'],
 })
 export class InsertQuestionComponent {
-  paperSubject : string = localStorage.getItem('paperSubject');
-  constructor(private service:PaperSetterService, private router:Router) { }
+
+  paperSubject: string = localStorage.getItem('paperSubject');
+  questionType = ['MCQ', 'True/False', 'Match the following'];
+  form: FormGroup;
+
+  constructor(private service: PaperSetterService, private router: Router) {
+    this.form = new FormGroup({
+      type: new FormControl(null),
+    });
+  }
+
+  get type(): string {
+    return this.form ? this.form.get('type').value : '';
+  }
 
   insertQuestion = new FormGroup({
     paperId: new FormControl(localStorage.getItem('paperId')),
@@ -28,15 +40,11 @@ export class InsertQuestionComponent {
 
   collectData() {
     console.log(this.insertQuestion.value);
-    this.service
-      .addQuestion(this.insertQuestion.value)
-      .subscribe((result) => {
-        console.log('result', result);
-        localStorage.setItem('questionId', result['questionId']);
-        this.router.navigate(['dashboard/question/choice']);
-      });
+    this.service.addQuestion(this.insertQuestion.value).subscribe((result) => {
+      console.log('result', result);
+      localStorage.setItem('questionId', result['questionId']);
+      this.router.navigate(['dashboard/question/choice']);
+    });
     this.insertQuestion.reset();
   }
-
-
 }

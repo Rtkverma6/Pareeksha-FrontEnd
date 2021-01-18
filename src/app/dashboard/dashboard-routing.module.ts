@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { PublishPaperComponent } from './publish-paper/publish-paper.component';
 import { CreatePaperComponent } from './create-paper/create-paper.component';
 import { InsertQuestionComponent } from './insert-question/insert-question.component';
-import { AddChoicesComponent } from './add-choices/add-choices.component';
+import { PapersetterDashboardComponent } from './papersetter-dashboard/papersetter-dashboard.component';
+
 
 const routes: Routes = [
   { path: 'publish', component: PublishPaperComponent },
   { path: 'create', component: CreatePaperComponent },
   { path: 'question/insert', component: InsertQuestionComponent },
-  { path: 'question/choice', component: AddChoicesComponent },
-
+  { path: 'papersetterDashboard', component: PapersetterDashboardComponent },
 ];
 
 @NgModule({
