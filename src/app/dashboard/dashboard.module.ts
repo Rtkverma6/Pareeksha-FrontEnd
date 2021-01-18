@@ -6,9 +6,13 @@ import { CreatePaperComponent } from './create-paper/create-paper.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InsertQuestionComponent } from './insert-question/insert-question.component';
 import { AddChoicesComponent } from './add-choices/add-choices.component';
+import { MCQComponent } from './insert-question/mcq/mcq.component';
+import { PapersetterDashboardComponent } from './papersetter-dashboard/papersetter-dashboard.component';
+import { MatchTheFollowingComponent } from './insert-question/match-the-following/match-the-following.component';
+import { TrueFalseComponent } from './insert-question/true-false/true-false.component';
 
 @NgModule({
-  declarations: [PublishPaperComponent, CreatePaperComponent, InsertQuestionComponent, AddChoicesComponent],
+  declarations: [PublishPaperComponent, CreatePaperComponent, InsertQuestionComponent, AddChoicesComponent, MCQComponent, PapersetterDashboardComponent, MatchTheFollowingComponent, TrueFalseComponent],
   imports: [
     CommonModule,
     DashBoardRoutingModule,

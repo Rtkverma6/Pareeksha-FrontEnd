@@ -17,5 +17,16 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label for="choice">Choice</label>
+    <input type="text" class="form-control" id="choice" placeholder="Enter Choice" formControlName="choice" required>
+    <div *ngIf="choice.invalid && (choice.dirty || choice.touched)" class="alert alert-danger">
+      <div *ngIf="choice.errors.required"> Field is required. </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="checkbox" class="form-check-input" id="isCorrect" formControlName="isCorrect">
+    <label for="isCorrect" class="form-check-label" >Check if this Choice is Correct </label>
+  </div>
   <button type="submit" class="btn btn-primary" [disabled]="!insertQuestion.valid">Insert</button>
 </form>
