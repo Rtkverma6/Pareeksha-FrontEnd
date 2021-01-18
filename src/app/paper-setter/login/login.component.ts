@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('currentUser') != null)
-      this.router.navigate(['/dashboard/create']);
+      this.router.navigate(['/dashboard/papersetterDashboard']);
   }
 
   jwtToken: any;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
           this.jwtToken = result;
           this.invalidLogin = false;
           localStorage.setItem('currentUser', this.jwtToken.jwt);
-          this.router.navigate(['/dashboard/create']);
+          this.router.navigate(['/dashboard/papersetterDashboard']);
         }
       },
       (error) => {
