@@ -4,5 +4,6 @@ export interface IQuestion {
     paperId:any
     question: String;
     points:Number;
+    questionType : string,
     choices: Array<IChoice>;
   }

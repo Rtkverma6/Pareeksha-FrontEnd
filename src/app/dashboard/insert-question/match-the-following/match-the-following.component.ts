@@ -19,6 +19,7 @@ export class MatchTheFollowingComponent {
     question: '',
     points: 0,
     choices: [],
+    questionType : "MATCHTHEFOLLOWING"
   };
 
   choiceObject: IChoice = {

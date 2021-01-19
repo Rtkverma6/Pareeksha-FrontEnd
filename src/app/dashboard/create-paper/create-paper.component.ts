@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaperSetterService } from '../../paper-setter.service';
 import { Validators } from '@angular/forms';
@@ -9,21 +9,23 @@ import { Router } from '@angular/router';
   templateUrl: './create-paper.component.html',
   styleUrls: ['./create-paper.component.css'],
 })
-export class CreatePaperComponent implements OnInit{
+export class CreatePaperComponent implements OnInit {
 
-  constructor(private service: PaperSetterService, private router: Router) {  }
+  constructor(private service: PaperSetterService, private router: Router) { }
 
   ngOnInit(): void {
     this.service.getPaperSetterId().subscribe(result => {
       console.log('Retrived papperSetter Id: ')
       console.log('result : ', result);
       console.log('Setting up paperSetter id in localstorage');
-    localStorage.setItem('paperSetterId', result.toString());
-    console.log(localStorage.getItem('paperSetterId'));
-  })
+      localStorage.setItem('paperSetterId', result.toString());
+      console.log(localStorage.getItem('paperSetterId'));
+    })
   }
 
   alert: boolean = false;
+
+  level  = ['EASY', 'MEDIUM', 'HARD'];
 
   createPaper = new FormGroup({
     paperSetterId: new FormControl(Number(localStorage.getItem('paperSetterId'))),
@@ -43,10 +45,9 @@ export class CreatePaperComponent implements OnInit{
     startDate: new FormControl(''),
     endDate: new FormControl(''),
     duration: new FormControl(''),
-    difficultyLevel: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(12),
-    ]),
+    difficultyLevel : new FormControl(null),
+    totalMarks: new FormControl(''),
+    totalQuestions: new FormControl(''),
   });
 
   get paperName() {
@@ -73,8 +74,12 @@ export class CreatePaperComponent implements OnInit{
     return this.createPaper.get('duration');
   }
 
-  get difficultyLevel() {
-    return this.createPaper.get('difficultyLevel');
+  get totalMarks() {
+    return this.createPaper.get('totalMarks');
+  }
+
+  get totalQuestions() {
+    return this.createPaper.get('totalQuestions');
   }
 
   collectData() {

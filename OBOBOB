@@ -1,0 +1,85 @@
+[33mcommit 88b1d7a5fcef048e16c16ca820a950f14550a412[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: a418d10 62fd7c6
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 21:23:37 2021 +0530
+
+    Merge branch 'master' of https://github.com/sumit-root/Pareeksha-FrontEnd
+
+[33mcommit a418d10900a731174956a6b6282918fc494aaddd[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 21:19:29 2021 +0530
+
+    Student fetch done and toatal marks calculated
+
+[33mcommit 62fd7c64b3d6e8b87d82101b757ad15982f61bb7[m
+Author: rahulpukle <rahulpukle3@gmail.com>
+Date:   Tue Jan 19 18:56:58 2021 +0530
+
+    Student Login
+
+[33mcommit fbb4e99af3e53607aa0ee140caae504f3851b750[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 12:10:10 2021 +0530
+
+    Student Module created
+
+[33mcommit fb04862b8c16f6037716745c308b8e96e5c6ed50[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 10:47:01 2021 +0530
+
+    Conflicts resoved
+
+[33mcommit 68f4d0c6e61f3d5939be496c86530e5e104c6bcd[m
+Merge: 1e81413 f16aeaa
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 10:37:08 2021 +0530
+
+    Pulled remote repo with Dashboard templete and questions templet
+
+[33mcommit 1e8141333d249f239d6370489e34d7500651e2fc[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Tue Jan 19 10:35:15 2021 +0530
+
+    MCQ templete done
+
+[33mcommit f16aeaa288b566a2444f0594885cc17b3fde7488[m
+Merge: e0ff6ea 94d5bc0
+Author: sumit-root <72307819+sumit-root@users.noreply.github.com>
+Date:   Tue Jan 19 01:00:19 2021 +0530
+
+    Merge pull request #2 from Rtkverma6/master_ritik
+    
+    Added all question templates, PageNotFound Component
+
+[33mcommit 94d5bc05a0aea4c76317504adab82483d43d51a5[m
+Author: Rtkverma6 <ritikverma651@gmail.com>
+Date:   Tue Jan 19 00:51:08 2021 +0530
+
+    Added all question templates, PageNotFound Component
+
+[33mcommit e0ff6ea44c2fa9186146954152239de52cd5014d[m
+Merge: 21ef8b9 41068a3
+Author: sumit-root <72307819+sumit-root@users.noreply.github.com>
+Date:   Mon Jan 18 20:14:34 2021 +0530
+
+    Merge pull request #1 from sumit-root/frontend_v1
+    
+    Updated true-false compnent
+
+[33mcommit 41068a302579f4088add763d62f19842f98250aa[m
+Author: cdac-puja <pujaojha051993@gmail.com>
+Date:   Mon Jan 18 13:56:26 2021 +0530
+
+    Updated true-false compnent
+
+[33mcommit 21ef8b93e800b0c8517518b0aabdf46063aea9bb[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Mon Jan 18 11:44:53 2021 +0530
+
+    Components for question templete created
+
+[33mcommit d76e00cb9fb420c71e5c4110a242082089ad06ed[m
+Author: sumit-root <chaudharisumit81@gmail.com>
+Date:   Sun Jan 17 09:23:20 2021 +0530
+
+    Chages made disscudded in meeting 16-01-21

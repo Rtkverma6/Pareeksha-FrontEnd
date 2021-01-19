@@ -19,7 +19,8 @@ export class MCQComponent {
     paperId:0,
     question: '',
     points: 0,
-    choices: []
+    choices: [],
+    questionType : "MCQ"
   }
 
   choiceObject: IChoice = {

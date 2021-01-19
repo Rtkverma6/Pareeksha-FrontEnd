@@ -57,7 +57,7 @@ export class PaperSetterService {
   }
   addStudent(data: any) {
     console.log('in service : ' + data.studentName + ':' + data.prn + ':' + data.paperId);
-    return this.http.post(this.url + 'student/login', data, this.httpOptions);
+    return this.http.post(this.url + 'student/login', data);
   }
   
 }

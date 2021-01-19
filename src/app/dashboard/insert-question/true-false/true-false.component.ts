@@ -21,7 +21,8 @@ export class TrueFalseComponent {
     paperId:0,
     question: '',
     points: 0,
-    choices: []
+    choices: [],
+    questionType : "TRUEORFALSE"
   }
 
   choiceObject: IChoice = {
