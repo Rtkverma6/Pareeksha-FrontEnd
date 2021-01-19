@@ -67,6 +67,6 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!createPaper.valid">Create</button>
+  <button type="submit" class="btn btn-primary" [ngClass] = "{'my-color': !createPaper.valid}" [disabled]="!createPaper.valid">Create</button>
 </form>
 
