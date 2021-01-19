@@ -51,4 +51,8 @@ export class PaperSetterService {
     console.log('in service : ' + data.question + ':' + data.points);
     return this.http.post(this.url + 'choice/insert', data, this.httpOptions);
   }
+
+  fetchPaper(paperId:Number){
+    return this.http.get(this.url + 'paper/fetch/'+paperId, this.httpOptions);
+  }
 }

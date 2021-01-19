@@ -1,1 +1,20 @@
 <p>fetch-paper works!</p>
+<h4>Paper Name : {{paper.paperName}}</h4>
+
+<div *ngFor="let q of paper.questions">
+    <div>
+        <p id="{{q.questionId}}" #qId>{{q.question}}</p>
+        <hr>
+        <div *ngFor="let c of q.choices">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="{{c.correct}}" (change)="onSelect(q.questionId,c.choiceId);">
+                    </div>
+                </div>
+                <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="button" value="Record" (click)="result()">

@@ -25,7 +25,8 @@ import { StudentModule } from './student/student.module';
     PaperSetterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    StudentModule
+    StudentModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
