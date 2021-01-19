@@ -6,6 +6,7 @@ import {PaperLoginComponent} from './paper-login/paper-login.component'
 
 
 
+
 const routes: Routes = [
   { path: 'fetchPaper', component: FetchPaperComponent },
   { path: 'login', component: LoginComponent },
@@ -16,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashBoardRoutingModule {}
+export class StudentRoutingModule {}

@@ -51,4 +51,8 @@ export class PaperSetterService {
     console.log('in service : ' + data.question + ':' + data.points);
     return this.http.post(this.url + 'choice/insert', data, this.httpOptions);
   }
+  addStudent(data: any) {
+    console.log('in service : ' + data.studentName + ':' + data.prn + ':' + data.paperId);
+    return this.http.post(this.url + 'student/login', data, this.httpOptions);
+  }
 }
