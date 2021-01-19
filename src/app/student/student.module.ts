@@ -4,7 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { PaperLoginComponent } from './paper-login/paper-login.component';
 import { FetchPaperComponent } from './fetch-paper/fetch-paper.component';
 import { StudentRoutingModule } from './student-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -12,9 +13,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [LoginComponent, PaperLoginComponent, FetchPaperComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     StudentRoutingModule,
-    ReactiveFormsModule
   ],
-  exports:[LoginComponent, PaperLoginComponent, FetchPaperComponent]
+  exports:[
+    LoginComponent, 
+    PaperLoginComponent, 
+    FetchPaperComponent
+  ]
 })
 export class StudentModule { }

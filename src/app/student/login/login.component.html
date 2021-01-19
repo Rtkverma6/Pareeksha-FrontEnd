@@ -1,1 +1,22 @@
-<p>login works!</p>
+<h2>Student Login Details </h2> <br>
+
+<form [formGroup]="loginSudent" (ngSubmit)="collectData()">
+
+    <div class="form-group">
+        <label for="studentName">Student Name</label>
+        <input type="text" class="form-control" id="studentName" placeholder="Enter Name" formControlName="studentName" required>
+        <div *ngIf="studentName.invalid && (studentName.dirty || studentName.touched)" class="alert alert-danger">
+            <div *ngIf="studentName.errors.required"> Student Name is required. </div>
+            <div *ngIf="studentName.errors.maxlength"> Max Length is 20 </div>
+          </div>
+    </div>
+    <div class="form-group">
+      <label for="prn">PRN</label>
+      <input type="text" class="form-control" id="prn" placeholder="Enter PRN" formControlName="prn" required>
+      <div *ngIf="prn.invalid && (prn.dirty || prn.touched)" class="alert alert-danger">
+        <div *ngIf="prn.errors.required"> PRN is required. </div>
+        <div *ngIf="prn.errors.maxlength"> Max Length is 10 </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!loginSudent.valid" >Login</button>
+</form>

@@ -55,4 +55,9 @@ export class PaperSetterService {
   fetchPaper(paperId:Number){
     return this.http.get(this.url + 'paper/fetch/'+paperId, this.httpOptions);
   }
+  addStudent(data: any) {
+    console.log('in service : ' + data.studentName + ':' + data.prn + ':' + data.paperId);
+    return this.http.post(this.url + 'student/login', data, this.httpOptions);
+  }
+  
 }
