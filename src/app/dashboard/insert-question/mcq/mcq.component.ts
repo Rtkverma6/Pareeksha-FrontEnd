@@ -28,7 +28,6 @@ export class MCQComponent {
   }
 
   insertQuestion = new FormGroup({
-    paperId: new FormControl(localStorage.getItem('paperId')),
     question: new FormControl('', [Validators.required]),
     points: new FormControl('', [Validators.required]),
     choice1: new FormControl('', [Validators.required]),
@@ -46,6 +45,19 @@ export class MCQComponent {
   }
   get points() {
     return this.insertQuestion.get('points');
+  }
+
+  get choice1(){
+    return this.insertQuestion.get('choice1');
+  }
+  get choice2(){
+    return this.insertQuestion.get('choice2');
+  }
+  get choice3(){
+    return this.insertQuestion.get('choice3');
+  }
+  get choice4(){
+    return this.insertQuestion.get('choice4');
   }
 
   addChoices() {
@@ -75,17 +87,16 @@ export class MCQComponent {
   }
 
   collectData() {
+    this.questionObject.paperId = localStorage.getItem('paperId').valueOf();
     this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();
-    // this.service
-    //   .addQuestion(this.insertQuestion.value)
-    //   .subscribe((result) => {
-    //     console.log('result', result);
-    //     localStorage.setItem('questionId', result['questionId']);
-    //     this.router.navigate(['dashboard/question/choice']);
-    //   });
-    // this.insertQuestion.reset();
+    this.service
+      .addQuestion(this.questionObject)
+      .subscribe((result) => {
+        console.log('result', result);
+      });
+    this.insertQuestion.reset();
     console.log(this.insertQuestion.value);
     console.log("question : " + this.questionObject.question);
     console.log("POints :" + this.questionObject.points);

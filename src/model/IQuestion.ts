@@ -1,7 +1,7 @@
 import { IChoice } from "./IChoice";
 
 export interface IQuestion {
-    paperId:number
+    paperId:any
     question: String;
     points:Number;
     choices: IChoice[];

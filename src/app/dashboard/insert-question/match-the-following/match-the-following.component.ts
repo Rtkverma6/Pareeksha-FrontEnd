@@ -29,7 +29,7 @@ export class MatchTheFollowingComponent {
   questionReceived: string[] = [];
 
   matchTheFollowing = new FormGroup({
-    paperId: new FormControl(localStorage.getItem('paperId')),
+
     points: new FormControl('', [Validators.required]),
 
     a: new FormControl('', [Validators.required]),
@@ -82,7 +82,7 @@ export class MatchTheFollowingComponent {
 
   collectData() {
     console.log(this.matchTheFollowing.value);
-
+    this.questionObject.paperId = localStorage.getItem('paperId').valueOf(),
     this.questionReceived.push(this.matchTheFollowing.value.a);
     this.questionReceived.push(this.matchTheFollowing.value.b);
     this.questionReceived.push(this.matchTheFollowing.value.c);
@@ -96,25 +96,9 @@ export class MatchTheFollowingComponent {
     this.questionObject.points = this.matchTheFollowing.value.points;
     this.addChoices();
 
-    console.log(
-      'Choice 1 : ' + this.questionObject.choices[0].choice +':' +
-        this.questionObject.choices[0].isCorrect
-    );
-    console.log(
-      'Choice 2 : ' + this.questionObject.choices[1].choice +':' +
-        this.questionObject.choices[1].isCorrect
-    );
-    console.log(
-      'Choice 3 : ' + this.questionObject.choices[2].choice +':' +
-        this.questionObject.choices[2].isCorrect
-    );
-    console.log(
-      'Choice 4 : ' + this.questionObject.choices[3].choice +':' +
-        this.questionObject.choices[3].isCorrect
-    );
-
-    // this.service.addQuestion(this.questionObject).subscribe((result) => {
-    //   console.log(result);
-    // });
+    this.service.addQuestion(this.questionObject).subscribe((result) => {
+      console.log(result);
+    });
+    this.matchTheFollowing.reset();
   }
 }

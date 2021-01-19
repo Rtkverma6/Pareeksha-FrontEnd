@@ -10,9 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./insert-question.component.css'],
 })
 export class InsertQuestionComponent {
-<<<<<<< HEAD
-  paperSubject : string = localStorage.getItem('paperSubject');
-=======
 
   paperSubject: string = localStorage.getItem('paperSubject');
   questionType = ['MCQ', 'True/False', 'Match the following'];
@@ -50,5 +47,4 @@ export class InsertQuestionComponent {
     });
     this.insertQuestion.reset();
   }
->>>>>>> f16aeaa288b566a2444f0594885cc17b3fde7488
 }

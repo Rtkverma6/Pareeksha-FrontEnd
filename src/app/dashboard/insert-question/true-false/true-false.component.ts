@@ -30,7 +30,7 @@ export class TrueFalseComponent {
   }
 
   insertQuestion = new FormGroup({
-    paperId: new FormControl(localStorage.getItem('paperId')),
+   
     question: new FormControl('', [Validators.required]),
     points: new FormControl('', [Validators.required]),
     choice1: new FormControl('', [Validators.required]),
@@ -47,42 +47,29 @@ export class TrueFalseComponent {
   }
   addChoices() {
     this.choiceObject = {
-      choice: this.insertQuestion.value.choice1,
+      choice: 'True',
       isCorrect: this.insertQuestion.value.isCorrect1
     };
     this.questionObject.choices.push(this.choiceObject);
 
     this.choiceObject = {
-      choice: this.insertQuestion.value.choice2,
+      choice: 'False',
       isCorrect: this.insertQuestion.value.isCorrect2
     };
     this.questionObject.choices.push(this.choiceObject);
   }
 
   collectData() {
+    this.questionObject.paperId = localStorage.getItem('paperId').valueOf(),
     this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();
-    // this.service
-    //   .addQuestion(this.insertQuestion.value)
-    //   .subscribe((result) => {
-    //     console.log('result', result);
-    //     localStorage.setItem('questionId', result['questionId']);
-    //     this.router.navigate(['dashboard/question/choice']);
-    //   });
-    // this.insertQuestion.reset();
-    console.log(this.insertQuestion.value);
-    console.log("question : " + this.questionObject.question);
-    console.log("POints :" + this.questionObject.points);
-  //  console.log("choices :" + this.questionObject.choices.toString());
-  console.log(
-    'Choice 1 : ' + this.questionObject.choices[0].choice +':' +
-      this.questionObject.choices[0].isCorrect
-  );
-  console.log(
-    'Choice 2 : ' + this.questionObject.choices[1].choice +':' +
-      this.questionObject.choices[1].isCorrect
-  );
-
+    this.service
+      .addQuestion(this.questionObject)
+      .subscribe((result) => {
+        console.log('result', result);
+      });
+    this.insertQuestion.reset();
+    
   }
 }

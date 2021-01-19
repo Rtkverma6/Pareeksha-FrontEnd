@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PaperSetterModule } from './paper-setter/paper-setter.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { StudentModule } from './student/student.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     DashboardModule,
     PaperSetterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StudentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
