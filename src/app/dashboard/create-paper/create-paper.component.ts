@@ -26,7 +26,6 @@ export class CreatePaperComponent implements OnInit{
   alert: boolean = false;
 
   createPaper = new FormGroup({
-    
     paperSetterId: new FormControl(Number(localStorage.getItem('paperSetterId'))),
     reviewed: new FormControl(false),
     paperName: new FormControl('', [

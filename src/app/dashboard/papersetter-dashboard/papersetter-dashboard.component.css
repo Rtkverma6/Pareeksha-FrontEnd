@@ -1,0 +1,23 @@
+h1{
+
+  margin-left: 30px;
+
+}
+a:hover{
+  color: red;
+  text-decoration: none;
+}
+
+
+p{
+  margin-left: 25px;
+}
+   ul.list-group{
+        margin-top: 50px;
+       margin-left: 30px;
+       padding: 5px;
+       margin-right: 300px ;
+       list-style-type:circle;
+
+   }
+
