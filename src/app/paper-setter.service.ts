@@ -52,6 +52,10 @@ export class PaperSetterService {
     return this.http.post(this.url + 'choice/insert', data, this.httpOptions);
   }
 
+  paperReviewed(paperId:Number){
+    return this.http.get(this.url + 'paper/review/'+paperId, this.httpOptions);
+  }
+
   fetchPaper(paperId:Number){
     return this.http.get(this.url + 'paper/fetch/'+paperId, this.httpOptions);
   }
@@ -59,5 +63,7 @@ export class PaperSetterService {
     console.log('in service : ' + data.studentName + ':' + data.prn + ':' + data.paperId);
     return this.http.post(this.url + 'student/login', data);
   }
+
+
   
 }

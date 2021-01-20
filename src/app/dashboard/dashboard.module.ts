@@ -9,9 +9,10 @@ import { MCQComponent } from './insert-question/mcq/mcq.component';
 import { PapersetterDashboardComponent } from './papersetter-dashboard/papersetter-dashboard.component';
 import { MatchTheFollowingComponent } from './insert-question/match-the-following/match-the-following.component';
 import { TrueFalseComponent } from './insert-question/true-false/true-false.component';
+import { ReviewComponent } from './publish-paper/review/review.component';
 
 @NgModule({
-  declarations: [PublishPaperComponent,MCQComponent, CreatePaperComponent, InsertQuestionComponent, PapersetterDashboardComponent, MatchTheFollowingComponent, TrueFalseComponent],
+  declarations: [PublishPaperComponent,MCQComponent, CreatePaperComponent, InsertQuestionComponent, PapersetterDashboardComponent, MatchTheFollowingComponent, TrueFalseComponent, ReviewComponent],
   imports: [
     CommonModule,
     DashBoardRoutingModule,
