@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PaperSetterService } from '../../../paper-setter.service';
+import { DashboardService } from '../../../dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IQuestion } from '../../../../model/IQuestion';
@@ -13,7 +13,7 @@ import { IChoice } from '../../../../model/IChoice';
 })
 export class MCQComponent {
   paperSubject: string = localStorage.getItem('paperSubject');
-  constructor(private service: PaperSetterService, private router: Router) { }
+  constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
     paperId:0,

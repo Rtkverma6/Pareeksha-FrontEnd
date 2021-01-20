@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PaperSetterService } from 'src/app/paper-setter.service';
+import { DashboardService } from 'src/app/dashboard.service';
 import { IChoice } from 'src/model/IChoice';
 import { IQuestion } from '../../../../model/IQuestion';
 
@@ -12,7 +12,7 @@ import { IQuestion } from '../../../../model/IQuestion';
   styleUrls: ['./match-the-following.component.css'],
 })
 export class MatchTheFollowingComponent {
-  constructor(private service: PaperSetterService, private router: Router) {}
+  constructor(private service: DashboardService, private router: Router) {}
 
   questionObject: IQuestion = {
     paperId: 0,
