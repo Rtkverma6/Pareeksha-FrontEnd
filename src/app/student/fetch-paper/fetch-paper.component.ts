@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from '../../student.service'
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 import { IAnswer } from 'src/model/IAnswer';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-fetch-paper',
@@ -15,12 +16,15 @@ export class FetchPaperComponent implements OnInit {
   someDate: Date;
 
   constructor(private service: StudentService, private router: Router) { }
-
+  
   paper: any = {
     paperName: '',
     paperSubject: '',
+    duration : 0,
     questions: []
   }
+
+  questions :any[] = [];
 
   questionAndChoice: IQuestionChoice = {
     questionId: 0,
@@ -45,15 +49,21 @@ export class FetchPaperComponent implements OnInit {
   }];
 
   ngOnInit(): void {
-    this.paperId = 1;
+    this.paperId = 3;
     this.service.fetchPaper(this.paperId).subscribe((result) => {
       console.log(result['paperName']);
+      console.log(result['duration']);
       this.paper = result;
-      console.log(this.paper.paperName);
-      console.log(this.paper.questions[0].question);
-      console.log(this.paper.questions[0].choices[0].correct);
+      this.paper.questions.forEach(ques => {
+        if(ques.questionType == "MATCHTHEFOLLOWING"){
+          this.questions = ques.question.split('~');
+          console.log(this.questions[0]);
+        }
+      });
     });
-    this.someDate = new Date(Date.now() + (1 * 60 + 12) * 1000);
+    //Hard coded value of duration
+    this.someDate = new Date(Date.now() + (1800) * 1000);
+    console.log("72"+this.someDate);
   }
   myTriggerFunction() {
     console.log('triggered!');
@@ -105,6 +115,6 @@ export class FetchPaperComponent implements OnInit {
     console.log(this.responses);
     this.filterQuestionsAndItsAnswers();
     this.calculateResult();
-    console.log("Toatal Marks Obtained"+this.marksObtained);
+    console.log("Toatal Marks Obtained" + this.marksObtained);
   }
 }

@@ -27,4 +27,13 @@ export class PaperSetterService {
     console.log('in service : ' + data.userName);
     return this.http.post(this.url + 'papersetter/login', data);
   }
+
+  getPapereToBeReviewed(paperId : Number){
+    return this.http.get(this.url+'paper/details/'+paperId,this.httpOptions);
+  }
+
+  updatePaperStatus(paperId : Number){
+    console.log(this.httpOptions);
+    return this.http.get(this.url+'paper/review/'+paperId,this.httpOptions);
+  }
 }

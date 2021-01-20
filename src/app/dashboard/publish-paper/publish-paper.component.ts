@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaperSetterService } from '../../paper-setter.service'
-import { IQuestionChoice } from 'src/model/IQuestionChoice';
 
 @Component({
   selector: 'app-publish-paper',
@@ -9,9 +8,25 @@ import { IQuestionChoice } from 'src/model/IQuestionChoice';
   styleUrls: ['./publish-paper.component.css']
 })
 export class PublishPaperComponent implements OnInit {
-  constructor() { }
+  paperSetterId : any
+  constructor(private service:PaperSetterService,private router:Router) { }
+
+  paper : any[] =[];
 
   ngOnInit(): void {
+    //this.paperSetterId  = localStorage.getItem('paperSetter').valueOf();
+    this.paperSetterId = 1;
+    this.service.getPapereToBeReviewed(this.paperSetterId).subscribe( (result :any) =>{
+      for (let index = 0; index < result.length; index++) {
+        let element = result[index];
+        this.paper.push(element);     
+      }
+    });
+    console.log(this.paper);
   }
- 
+
+  review(paperId :any){
+  localStorage.setItem('pageToBeReviewed',paperId);
+   this.router.navigate(['dashboard/publish/review']);
+  }
 }

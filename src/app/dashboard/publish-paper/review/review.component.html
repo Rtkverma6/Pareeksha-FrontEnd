@@ -1,21 +1,55 @@
-<p>review works!</p>
 <h4>Paper Name : {{paper.paperName}}</h4>
-<form (ngSubmit)="collectData()">
+<form>
     <div *ngFor=" let q of paper.questions">
-    <div>
-        <p id="{{q.questionId}}" #qId>{{q.question}}</p>
-        <hr>
-        <div *ngFor="let c of q.choices">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>
+        <div *ngIf="q.questionType == 'MCQ' || q.questionType == 'TRUEORFALSE'">
+            <p id="{{q.questionId}}" #qId>{{q.question}}</p>
+            <hr>
+            <div *ngFor="let c of q.choices">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>
+                        </div>
                     </div>
+                    <p class="input-group-text" id="{{c.choiceId}}">&nbsp;{{c.correct}}</p>
                 </div>
-                <p id="{{c.choiceId}}">&nbsp;{{c.choice.correct}}</p>
+            </div>
+        </div>
+        <div *ngIf="q.questionType == 'MATCHTHEFOLLOWING'">
+            <hr>
+            <hr>
+            <p>Match The Following</p>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>{{questions[0]}}</td>
+                        <td>{{questions[1]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[2]}}</td>
+                        <td>{{questions[3]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[4]}}</td>
+                        <td>{{questions[5]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[6]}}</td>
+                        <td>{{questions[7]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngFor="let c of q.choices">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>
+                        </div>
+                    </div>
+                    <p class="input-group-text" id="{{c.choiceId}}">&nbsp;{{c.correct}}</p>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    <button type="submit" class="btn btn-primary" >Reviwed</button>
+    <button type="button" (click)="collectData()" class="btn btn-primary">Reviewed</button>
 </form>

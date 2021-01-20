@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaperSetterService } from '../../../paper-setter.service'
+import { StudentService } from '../../../student.service'
+import { PaperSetterService } from "../../../paper-setter.service";
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 
 @Component({
@@ -10,10 +11,10 @@ import { IQuestionChoice } from 'src/model/IQuestionChoice';
 })
 export class ReviewComponent implements OnInit {
 
-  paperId: Number;
+  paperId: any;
   marksObtained: number = 0;
   paperSetterId : any;
-  constructor(private service: PaperSetterService, private router: Router) { }
+  constructor(private service: StudentService, private router: Router,private paperSetterService:PaperSetterService) { }
 
   paper: any = {
     paperName: '',
@@ -21,6 +22,8 @@ export class ReviewComponent implements OnInit {
     questions: []
   }
 
+  questions :any[] = [];
+  
   questionAndChoice: IQuestionChoice = {
     questionId: 0,
     selectedChoiceId: 0
@@ -32,28 +35,27 @@ export class ReviewComponent implements OnInit {
   }];
 
   ngOnInit(): void {
-    this.paperSetterId  = localStorage.getItem('paperSetter').valueOf();
-  }
-
-  fetchPaperDetails(){
-    this.paperId = 1;
+    this.paperId = localStorage.getItem('pageToBeReviewed');
     this.service.fetchPaper(this.paperId).subscribe((result) => {
       console.log(result['paperName']);
       this.paper = result;
       console.log(this.paper.paperName);
       console.log(this.paper.questions[0].question);
       console.log(this.paper.questions[0].choices[0].correct);
+
+      this.paper.questions.forEach(ques => {
+        if(ques.questionType == "MATCHTHEFOLLOWING"){
+          this.questions = ques.question.split('~');
+          console.log(this.questions[0]);
+        }
+      });
     });
   }
 
   collectData() {
     console.log("In collectData data");
-    this.service.paperReviewed(this.paperId).subscribe((result) => {
-      console.log(result['paperName']);
-      this.paper = result;
-      console.log(this.paper.paperName);
-      console.log(this.paper.questions[0].question);
-      console.log(this.paper.questions[0].choices[0].correct);
+    this.paperSetterService.updatePaperStatus(this.paperId).subscribe((result) => {
+      this.router.navigate(['dashboard/papersetterDashboard']);
     });
   }
 }
