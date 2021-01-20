@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaperSetterService } from '../../paper-setter.service'
+import { StudentService } from '../../student.service'
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 import { IAnswer } from 'src/model/IAnswer';
-
-
 
 @Component({
   selector: 'app-fetch-paper',
@@ -14,7 +12,9 @@ import { IAnswer } from 'src/model/IAnswer';
 export class FetchPaperComponent implements OnInit {
   paperId: Number;
   marksObtained: number = 0;
-  constructor(private service: PaperSetterService, private router: Router) { }
+  someDate: Date;
+
+  constructor(private service: StudentService, private router: Router) { }
 
   paper: any = {
     paperName: '',
@@ -53,6 +53,11 @@ export class FetchPaperComponent implements OnInit {
       console.log(this.paper.questions[0].question);
       console.log(this.paper.questions[0].choices[0].correct);
     });
+    this.someDate = new Date(Date.now() + (1 * 60 + 12) * 1000);
+  }
+  myTriggerFunction() {
+    console.log('triggered!');
+    this.result();
   }
 
   filterQuestionsAndItsAnswers() {

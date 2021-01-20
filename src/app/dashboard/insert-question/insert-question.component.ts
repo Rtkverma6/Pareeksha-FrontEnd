@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PaperSetterService } from '../../paper-setter.service';
+import { DashboardService } from '../../dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class InsertQuestionComponent {
   questionType = ['MCQ', 'True/False', 'Match the following'];
   form: FormGroup;
 
-  constructor(private service: PaperSetterService, private router: Router) {
+  constructor(private service: DashboardService, private router: Router) {
     this.form = new FormGroup({
       type: new FormControl(null),
     });

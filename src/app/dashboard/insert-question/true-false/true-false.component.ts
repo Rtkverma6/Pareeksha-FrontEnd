@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PaperSetterService } from '../../../paper-setter.service';
+import { DashboardService } from '../../../dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IQuestion } from '../../../../model/IQuestion';
@@ -15,7 +15,7 @@ import { IChoice } from '../../../../model/IChoice';
 export class TrueFalseComponent {
 
   paperSubject: string = localStorage.getItem('paperSubject');
-  constructor(private service: PaperSetterService, private router: Router) { }
+  constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
     paperId:0,
@@ -31,7 +31,7 @@ export class TrueFalseComponent {
   }
 
   insertQuestion = new FormGroup({
-   
+
     question: new FormControl('', [Validators.required]),
     points: new FormControl('', [Validators.required]),
     choice1: new FormControl('', [Validators.required]),
@@ -71,6 +71,6 @@ export class TrueFalseComponent {
         console.log('result', result);
       });
     this.insertQuestion.reset();
-    
+
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PaperSetterService } from '../../paper-setter.service';
+import { DashboardService } from '../../dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CreatePaperComponent implements OnInit {
 
-  constructor(private service: PaperSetterService, private router: Router) { }
+  constructor(private service: DashboardService, private router: Router) { }
 
   ngOnInit(): void {
     this.service.getPaperSetterId().subscribe(result => {

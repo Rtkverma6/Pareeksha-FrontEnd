@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router} from '@angular/router';
+import { StudentService } from '../../student.service';
 
 @Component({
   selector: 'app-paper-login',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaperLoginComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private service:StudentService , private router: Router) { }
   ngOnInit(): void {
-  }
+   }
 
+  jwtToken: any;
+  invalidLogin: boolean = false;
+
+  loginUser = new FormGroup({
+    paperId: new FormControl('', [Validators.required]),
+    paperPassword: new FormControl('', [Validators.required]),
+  });
+
+  collectData() {
+    console.log(this.loginUser.value);
+    this.service.getPaper(this.loginUser.value).subscribe(
+      (result) => {
+        if (result != null) {
+          console.log(result);
+          this.jwtToken = result;
+          this.invalidLogin = false;
+          this.router.navigate(['/student/login']);
+        }
+      },
+      (error) => {
+        this.jwtToken = 'Invalid Login, Please Retry !!!';
+        this.invalidLogin = true;
+      }
+    );
+    this.loginUser.reset();
+  }
+  closeAlert() {
+    this.invalidLogin = false;
+  }
 }

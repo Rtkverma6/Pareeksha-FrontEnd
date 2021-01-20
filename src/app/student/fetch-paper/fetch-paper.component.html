@@ -1,4 +1,8 @@
-<p>fetch-paper works!</p>
+<p>
+  Time Left:
+  <countdown-timer [endDate]="someDate" (zeroTrigger)="myTriggerFunction()"></countdown-timer>
+</p>
+
 <h4>Paper Name : {{paper.paperName}}</h4>
 
 <div *ngFor="let q of paper.questions">

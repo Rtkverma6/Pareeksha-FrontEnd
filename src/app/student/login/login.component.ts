@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PaperSetterService } from 'src/app/paper-setter.service';
+import { StudentService } from 'src/app/student.service';
 
 @Component({
   selector: 'app-login',
@@ -9,23 +9,16 @@ import { PaperSetterService } from 'src/app/paper-setter.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private service: PaperSetterService, private router: Router) {  }
+  constructor(private service: StudentService, private router: Router) {  }
 
   ngOnInit(): void {
-    // this.service.getPaperSetterId().subscribe(result => {
-    //   console.log('Retrived papperSetter Id: ')
-    //   console.log('result : ', result);
-    //   console.log('Setting up paperSetter id in localstorage');
-    // localStorage.setItem('paperSetterId', result.toString());
-  //   // console.log(localStorage.getItem('paperSetterId'));
-  // })  
 }
-  
+
   invalidLogin: boolean = false;
 
   loginSudent = new FormGroup({
     paperId: new FormControl(Number(localStorage.getItem('paperId'))),
-    studentName: new FormControl('', 
+    studentName: new FormControl('',
     [ Validators.required,
       Validators.maxLength(20)
     ]),
@@ -52,7 +45,7 @@ export class LoginComponent implements OnInit {
     });
     this.invalidLogin = true;
     this.loginSudent.reset();
-     
+
   }
 
   closeAlert() {
