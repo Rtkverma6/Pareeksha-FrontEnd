@@ -10,7 +10,7 @@ import { StudentService } from 'src/app/student.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private service: StudentService, private router: Router) {  }
-
+  mesg : string;
   ngOnInit(): void {
 }
 
@@ -39,13 +39,17 @@ export class LoginComponent implements OnInit {
     console.log(this.loginSudent.value);
     this.service.addStudent(this.loginSudent.value).subscribe((result) => {
       console.log('result : ', result);
-      localStorage.setItem('paperId', result['paperId']);
       localStorage.setItem('studentName', result['studentName']);
       localStorage.setItem('prn', result['prn']);
+    },
+    (error) => {
+      console.log(error);
+      this.mesg = "Invalid login!!";
+      this.invalidLogin = true;
     });
     this.invalidLogin = true;
     this.loginSudent.reset();
-
+    this.router.navigate(['student/fetchPaper'])
   }
 
   closeAlert() {

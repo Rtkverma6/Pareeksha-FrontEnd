@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { StudentService } from '../../student.service'
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 import { IAnswer } from 'src/model/IAnswer';
-import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-fetch-paper',
@@ -11,10 +10,11 @@ import { Time } from '@angular/common';
   styleUrls: ['./fetch-paper.component.css']
 })
 export class FetchPaperComponent implements OnInit {
-  paperId: Number;
+  paperId: any;
   marksObtained: number = 0;
   someDate: Date;
-
+  mesg : string;
+  invalidLogin: boolean = false;
   constructor(private service: StudentService, private router: Router) { }
   
   paper: any = {
@@ -49,7 +49,7 @@ export class FetchPaperComponent implements OnInit {
   }];
 
   ngOnInit(): void {
-    this.paperId = 3;
+    this.paperId = localStorage.getItem('currentPaperId');
     this.service.fetchPaper(this.paperId).subscribe((result) => {
       console.log(result['paperName']);
       console.log(result['duration']);
@@ -60,6 +60,11 @@ export class FetchPaperComponent implements OnInit {
           console.log(this.questions[0]);
         }
       });
+    },
+    (error) => {
+      console.log(error);
+      this.mesg = "Failed to fetch paper";
+      this.invalidLogin = true;
     });
     //Hard coded value of duration
     this.someDate = new Date(Date.now() + (1800) * 1000);

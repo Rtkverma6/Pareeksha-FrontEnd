@@ -14,7 +14,7 @@ export class PaperLoginComponent implements OnInit {
   ngOnInit(): void {
    }
 
-  jwtToken: any;
+  res: any;
   invalidLogin: boolean = false;
 
   loginUser = new FormGroup({
@@ -28,13 +28,15 @@ export class PaperLoginComponent implements OnInit {
       (result) => {
         if (result != null) {
           console.log(result);
-          this.jwtToken = result;
+          this.res = result;
+          localStorage.setItem('currentPaperId',this.res.paperId);
           this.invalidLogin = false;
           this.router.navigate(['/student/login']);
         }
       },
       (error) => {
-        this.jwtToken = 'Invalid Login, Please Retry !!!';
+        console.log(error);
+        this.res = "Invalid login!!";
         this.invalidLogin = true;
       }
     );

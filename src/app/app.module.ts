@@ -10,6 +10,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PaperSetterModule } from './paper-setter/paper-setter.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { StudentModule } from './student/student.module';
+import { HomeModule } from "./home/home.module";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { StudentModule } from './student/student.module';
     HttpClientModule,
     ReactiveFormsModule,
     StudentModule,
-
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
