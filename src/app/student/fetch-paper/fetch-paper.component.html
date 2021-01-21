@@ -1,9 +1,10 @@
+
 <div *ngIf="invalidLogin" class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong> {{mesg}} </strong>
-   <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
+    <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
     </button>
-  </div>
+</div>
 <p>
     Time Left:
     <countdown-timer [endDate]="someDate" (zeroTrigger)="myTriggerFunction()"></countdown-timer>
@@ -21,7 +22,7 @@
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="{{c.correct}}" (change)="onSelect(q.questionId,c.choiceId);">
+                        <input type="checkbox" name="q.questionId" id="c.choiceId" (change)='onSelect(q.questionId,c.choiceId);'>
                     </div>
                 </div>
                 <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>
@@ -29,12 +30,13 @@
         </div>
     </div>
     <div *ngIf="q.questionType == 'MATCHTHEFOLLOWING'">
-        <hr><hr>
+        <hr>
+        <hr>
         <p>Match The Following</p>
         <table class="table table-bordered">
             <tbody>
                 <tr>
-                    <td >{{questions[0]}}</td>
+                    <td>{{questions[0]}}</td>
                     <td>{{questions[1]}}</td>
                 </tr>
                 <tr>
@@ -56,7 +58,7 @@
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="{{c.correct}}" (change)="onSelect(q.questionId,c.choiceId);">
+                        <input type="checkbox" name="q.questionId" id="c.choiceId" (change)="onSelect(q.questionId,c.choiceId);">
                     </div>
                 </div>
                 <p id="{{c.choiceId}}">&nbsp;{{c.choice}}</p>

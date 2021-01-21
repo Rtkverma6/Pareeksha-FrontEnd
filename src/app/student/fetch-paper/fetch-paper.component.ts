@@ -13,18 +13,18 @@ export class FetchPaperComponent implements OnInit {
   paperId: any;
   marksObtained: number = 0;
   someDate: Date;
-  mesg : string;
+  mesg: string;
   invalidLogin: boolean = false;
   constructor(private service: StudentService, private router: Router) { }
-  
+
   paper: any = {
     paperName: '',
     paperSubject: '',
-    duration : 0,
+    duration: 0,
     questions: []
   }
-
-  questions :any[] = [];
+  repeate: boolean = false;
+  questions: any[] = [];
 
   questionAndChoice: IQuestionChoice = {
     questionId: 0,
@@ -49,26 +49,27 @@ export class FetchPaperComponent implements OnInit {
   }];
 
   ngOnInit(): void {
+    this.responses.length = 0;
     this.paperId = localStorage.getItem('currentPaperId');
     this.service.fetchPaper(this.paperId).subscribe((result) => {
       console.log(result['paperName']);
       console.log(result['duration']);
       this.paper = result;
       this.paper.questions.forEach(ques => {
-        if(ques.questionType == "MATCHTHEFOLLOWING"){
+        if (ques.questionType == "MATCHTHEFOLLOWING") {
           this.questions = ques.question.split('~');
           console.log(this.questions[0]);
         }
       });
     },
-    (error) => {
-      console.log(error);
-      this.mesg = "Failed to fetch paper";
-      this.invalidLogin = true;
-    });
+      (error) => {
+        console.log(error);
+        this.mesg = "Failed to fetch paper";
+        this.invalidLogin = true;
+      });
     //Hard coded value of duration
     this.someDate = new Date(Date.now() + (1800) * 1000);
-    console.log("72"+this.someDate);
+    console.log("72" + this.someDate);
   }
   myTriggerFunction() {
     console.log('triggered!');
@@ -76,6 +77,7 @@ export class FetchPaperComponent implements OnInit {
   }
 
   filterQuestionsAndItsAnswers() {
+    this.answers.length = 0;
     this.paper.questions.forEach(q => {
       q.choices.forEach(c => {
         var correctId = 0;
@@ -87,6 +89,7 @@ export class FetchPaperComponent implements OnInit {
             point: q.points
           }
           console.log(correctId, q.questionId);
+          console.log(this.answers.length);
           this.answers.push(this.ansQuestionAndChoice);
         }
       });
@@ -94,25 +97,49 @@ export class FetchPaperComponent implements OnInit {
   }
 
   calculateResult() {
-    for (let index = 1; index < this.answers.length; index++) {
-      let ans = this.answers[index];
-      let res = this.responses[index];
-      if (ans.questionId == res.questionId) {
-        if (ans.selectedChoiceId == res.selectedChoiceId) {
-          console.log(this.marksObtained);
-          this.marksObtained += ans.point;
-        }
-      }
+    if (this.answers.length != this.responses.length) {
+      console.log('resubmitted response for' + "Length of resp " + this.responses.length + "ans length " + this.answers.length);
+      this.mesg = "All questions must be answered....";
+      this.invalidLogin = true;
+      this.answers.length = 0;
+      return;
+    } else {
+
+      this.answers.forEach(ans => {
+        this.responses.forEach(res => {
+          if (ans.questionId == res.questionId) {
+            if (ans.selectedChoiceId == res.selectedChoiceId) {
+              console.log(this.marksObtained);
+              this.marksObtained += ans.point;
+            }
+          }
+        });
+      });
     }
   }
 
   onSelect(qId: any, cId: any) {
     console.log(qId, cId);
-    this.questionAndChoice = {
-      questionId: qId,
-      selectedChoiceId: cId
+    this.responses.forEach((e, index) => {
+      if (e.questionId == qId) {
+        this.repeate = true;
+        console.log(this.responses);
+        console.log('resubmitted response for' + qId + "Length of resp " + this.responses.length + "ans length " + this.answers.length);
+        this.responses.splice(index, 1);
+        console.log(this.responses);
+        console.log('deleted @ index' + index);
+        console.log('resubmitted response for' + qId + "Length of resp " + this.responses.length + "ans length " + this.answers.length);
+      }
+    });
+    if (this.repeate == false) {
+      this.questionAndChoice = {
+        questionId: qId,
+        selectedChoiceId: cId
+      }
+      this.responses.push(this.questionAndChoice);
+      console.log("lengh of res after push" + this.responses.length)
     }
-    this.responses.push(this.questionAndChoice);
+    this.repeate = false;
   }
 
   result() {
@@ -120,6 +147,10 @@ export class FetchPaperComponent implements OnInit {
     console.log(this.responses);
     this.filterQuestionsAndItsAnswers();
     this.calculateResult();
+
     console.log("Toatal Marks Obtained" + this.marksObtained);
+  }
+  closeAlert() {
+    this.invalidLogin = false;
   }
 }
