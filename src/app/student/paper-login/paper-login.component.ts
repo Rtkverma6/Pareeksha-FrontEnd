@@ -29,7 +29,9 @@ export class PaperLoginComponent implements OnInit {
         if (result != null) {
           console.log(result);
           this.res = result;
-          localStorage.setItem('currentPaperId',this.res.paperId);
+          localStorage.setItem('currentPaperId',result['paperId']);
+          localStorage.setItem('totalMarks',result['totalMarks']);
+          localStorage.setItem('totalQuestions',result['totalQuestions']);
           this.invalidLogin = false;
           this.router.navigate(['/student/login']);
         }

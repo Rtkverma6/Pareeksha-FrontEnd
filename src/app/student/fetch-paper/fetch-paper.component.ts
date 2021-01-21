@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { StudentService } from '../../student.service';
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 import { IAnswer } from 'src/model/IAnswer';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-fetch-paper',
@@ -11,10 +12,11 @@ import { IAnswer } from 'src/model/IAnswer';
 })
 export class FetchPaperComponent implements OnInit {
   paperId: any;
-  marksObtained: number = 0;
-  someDate: Date = new Date(Date.now() + 10);
+  marksObtained: number =0;
+  someDate: Date = new Date(Date.now() + 100);
   mesg: string;
   invalidLogin: boolean = false;
+  ifSubmit:boolean = false;
 
   constructor(private service: StudentService, private router: Router) {}
 
@@ -26,6 +28,13 @@ export class FetchPaperComponent implements OnInit {
   }
   repeate: boolean = false;
   questions: any[] = [];
+
+  paperResult : any = {
+    studentId : 0,
+    marksObtained : 0,
+    resp : [] ,
+    submittedOn : new Date()
+  };
 
   questionAndChoice: IQuestionChoice = {
     questionId: 0,
@@ -56,6 +65,7 @@ export class FetchPaperComponent implements OnInit {
   ngOnInit(): void {
     this.responses.length = 0;
     this.paperId = localStorage.getItem('currentPaperId');
+    console.log("onLoad student Id"+localStorage.getItem('studentId'));
     this.service.fetchPaper(this.paperId).subscribe(
       (result) => {
         this.paper = result;
@@ -109,14 +119,14 @@ export class FetchPaperComponent implements OnInit {
       this.answers.length = 0;
       return;
     } else {
-
       this.answers.forEach(ans => {
         this.responses.forEach(res => {
           if (ans.questionId == res.questionId) {
             if (ans.selectedChoiceId == res.selectedChoiceId) {
-              console.log(this.marksObtained);
+              console.log("In Calcualate fun *****************"+this.marksObtained);
               this.marksObtained += ans.point;
             }
+            this.ifSubmit = true;
           }
         });
       });
@@ -145,7 +155,6 @@ export class FetchPaperComponent implements OnInit {
       console.log("lengh of res after push" + this.responses.length)
     }
     this.repeate = false;
-
   }
 
   result() {
@@ -153,8 +162,20 @@ export class FetchPaperComponent implements OnInit {
     console.log(this.responses);
     this.filterQuestionsAndItsAnswers();
     this.calculateResult();
-
-    console.log("Toatal Marks Obtained" + this.marksObtained);
+    if(this.ifSubmit == true){
+      console.log("In student Id"+localStorage.getItem('studentId'));
+      this.paperResult.studentId =localStorage.getItem('studentId');
+      this.paperResult.marksObtained = this.marksObtained;
+      this.paperResult.resp = this.responses;
+      this.paperResult.resp.array;
+      console.log(this.paperResult.resp);
+      localStorage.setItem('marksObtained',this.paperResult.marksObtained);
+      console.log(" Submitting Toatal Marks Obtained" + this.marksObtained);
+      this.service.storeResult(this.paperResult).subscribe(error => {
+        console.error();
+        this.invalidLogin = true;
+      });
+    }
   }
   closeAlert() {
     this.invalidLogin = false;

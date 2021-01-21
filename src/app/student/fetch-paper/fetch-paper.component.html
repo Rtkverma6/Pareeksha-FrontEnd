@@ -12,11 +12,11 @@
 
 <h4>Paper Name : {{paper.paperName}}</h4>
 
-<div *ngFor="let q of paper.questions">
+<div *ngFor="let q of paper.questions ; index as i">
     <div *ngIf="q.questionType == 'MCQ' || q.questionType == 'TRUEORFALSE'">
         <hr>
         <hr>
-        <p id="{{q.questionId}}">{{q.question}}</p>
+        <p id="{{q.questionId}}">{{i+1}}.&nbsp;{{q.question}}</p>
         <hr>
         <div *ngFor="let c of q.choices">
             <div class="input-group">
@@ -66,4 +66,4 @@
         </div>
     </div>
 </div>
-<input type="button" value="Record" (click)="result()">
+<input type="button" class="btn btn-primary" value="Submit Paper" (click)="result()">

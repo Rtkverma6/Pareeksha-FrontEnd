@@ -12,12 +12,13 @@ export class LoginComponent implements OnInit {
   constructor(private service: StudentService, private router: Router) {  }
   mesg : string;
   ngOnInit(): void {
+    console.log("On load"+localStorage.getItem('currentPaperId'));
 }
 
   invalidLogin: boolean = false;
 
   loginSudent = new FormGroup({
-    paperId: new FormControl(Number(localStorage.getItem('paperId'))),
+    paperId: new FormControl(Number(localStorage.getItem('currentPaperId'))),
     studentName: new FormControl('',
     [ Validators.required,
       Validators.maxLength(20)
@@ -25,6 +26,12 @@ export class LoginComponent implements OnInit {
     prn: new FormControl('', [  Validators.required,
       Validators.maxLength(10),]),
   });
+
+  loginData :any = {
+    paperId : 0,
+    studentName : this.loginSudent.value.studentName,
+    prn : this.loginSudent.value.prn
+  }
 
   get studentName() {
     return this.loginSudent.get('studentName');
@@ -36,10 +43,13 @@ export class LoginComponent implements OnInit {
 
 
   collectData() {
-    console.log(this.loginSudent.value);
+    this.loginData.paperId = localStorage.getItem('currentPaperId');
+    console.log("Login data"+this.loginData)
     this.service.addStudent(this.loginSudent.value).subscribe((result) => {
       console.log('result : ', result);
       localStorage.setItem('studentName', result['studentName']);
+      localStorage.setItem('studentId',result['studentId']);
+      console.log("set student Id"+localStorage.getItem('studentId'));
       localStorage.setItem('prn', result['prn']);
     },
     (error) => {

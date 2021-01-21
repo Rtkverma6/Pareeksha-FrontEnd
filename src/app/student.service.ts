@@ -6,7 +6,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 })
 export class StudentService {
   url = 'http://localhost:8080/';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   addStudent(data: any) {
     console.log(
@@ -20,5 +20,9 @@ export class StudentService {
   }
   fetchPaper(paperId: Number) {
     return this.http.get(this.url + 'paper/fetch/' + paperId);
+  }
+
+  storeResult(data: any) {
+    return this.http.post(this.url + 'student/result', data);
   }
 }
