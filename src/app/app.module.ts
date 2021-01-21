@@ -11,12 +11,13 @@ import { PaperSetterModule } from './paper-setter/paper-setter.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { StudentModule } from './student/student.module';
 import { HomeModule } from "./home/home.module";
-
+import { SessionComponent } from './session/session.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    SessionComponent,
   ],
   imports: [
     BrowserModule,

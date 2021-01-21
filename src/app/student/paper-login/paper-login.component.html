@@ -1,6 +1,4 @@
-<!-- <app-global-navbar></app-global-navbar> -->
-
-<h2>Login Details </h2> <br>
+<h2>Exam Details </h2> <br>
 <div *ngIf="invalidLogin" class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong> {{res}} </strong>
  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
@@ -15,7 +13,7 @@
         <input type="number" class="form-control" id="paperId" placeholder="Enter Paper-id" formControlName="paperId" required>
     </div>
     <div class="form-group">
-      <label for="paperPassword">Password</label>
+      <label for="paperPassword">Paper Code</label>
       <input type="password" class="form-control" id="paperPassword" placeholder="Enter Password" formControlName="paperPassword" required>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!loginUser.valid" >Login</button>

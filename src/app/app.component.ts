@@ -1,4 +1,5 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component ,OnInit,Input} from '@angular/core';
+import { SessionComponent} from './session/session.component'
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,21 @@ import { Component ,OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit{
   title = 'pariksha-front-end';
-  currentUser: any;
 
+  @Input()
+  session: SessionComponent;
+
+  constructor() { }
+  // currentUser: any;
+
+  // ngOnInit(): void {
+  //   this.currentUser = localStorage.getItem('currentUser');
+  // }
   ngOnInit(): void {
-    this.currentUser = localStorage.getItem('currentUser');
+    this.session = new SessionComponent();
+  }
+
+  logout() {
+    this.session.logout();
   }
 }
