@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           console.log(result);
           this.jwtToken = result;
           this.invalidLogin = false;
-          localStorage.setItem('currentUser', this.jwtToken.jwt);
+          sessionStorage.setItem('currentUser', this.jwtToken.jwt);
           this.router.navigate(['/dashboard/papersetterDashboard']);
         }
       },

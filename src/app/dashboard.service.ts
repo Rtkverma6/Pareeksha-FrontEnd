@@ -8,7 +8,7 @@ export class DashboardService {
   url = 'http://localhost:8080/';
   constructor(private http: HttpClient) {}
 
-  jwt = localStorage.getItem('currentUser');
+  jwt = sessionStorage.getItem('currentUser');
 
   headers_object: HttpHeaders = new HttpHeaders().set(
     'Authorization',
@@ -20,7 +20,7 @@ export class DashboardService {
   };
 
   getPaperSetterId() {
-    this.jwt = localStorage.getItem('currentUser');
+    this.jwt = sessionStorage.getItem('currentUser');
     this.headers_object = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + this.jwt.toString()

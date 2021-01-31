@@ -64,8 +64,8 @@ export class FetchPaperComponent implements OnInit {
 
   ngOnInit(): void {
     this.responses.length = 0;
-    this.paperId = localStorage.getItem('currentPaperId');
-    console.log("onLoad student Id"+localStorage.getItem('studentId'));
+    this.paperId = sessionStorage.getItem('currentPaperId');
+    console.log("onLoad student Id"+sessionStorage.getItem('studentId'));
     this.service.fetchPaper(this.paperId).subscribe(
       (result) => {
         this.paper = result;
@@ -163,14 +163,16 @@ export class FetchPaperComponent implements OnInit {
     this.filterQuestionsAndItsAnswers();
     this.calculateResult();
     if(this.ifSubmit == true){
-      console.log("In student Id"+localStorage.getItem('studentId'));
-      this.paperResult.studentId =localStorage.getItem('studentId');
+      console.log("In student Id"+sessionStorage.getItem('studentId'));
+      this.paperResult.studentId =sessionStorage.getItem('studentId');
       this.paperResult.marksObtained = this.marksObtained;
       this.paperResult.resp = this.responses;
       this.paperResult.resp.array;
       console.log(this.paperResult.resp);
-      localStorage.setItem('marksObtained',this.paperResult.marksObtained);
+      sessionStorage.setItem('marksObtained',this.paperResult.marksObtained);
       console.log(" Submitting Toatal Marks Obtained" + this.marksObtained);
+      
+      //Calling service to store result
       this.service.storeResult(this.paperResult).subscribe(error => {
         console.error();
         this.invalidLogin = true;

@@ -42,7 +42,7 @@ export class InsertQuestionComponent {
     console.log(this.insertQuestion.value);
     this.service.addQuestion(this.insertQuestion.value).subscribe((result) => {
       console.log('result', result);
-      localStorage.setItem('questionId', result['questionId']);
+      sessionStorage.setItem('questionId', result['questionId']);
       this.router.navigate(['dashboard/question/choice']);
     });
     this.insertQuestion.reset();

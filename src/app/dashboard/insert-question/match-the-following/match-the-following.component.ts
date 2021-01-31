@@ -12,6 +12,7 @@ import { IQuestion } from '../../../../model/IQuestion';
   styleUrls: ['./match-the-following.component.css'],
 })
 export class MatchTheFollowingComponent {
+  paperSubject: string = sessionStorage.getItem('paperSubject');
   constructor(private service: DashboardService, private router: Router) {}
 
   questionObject: IQuestion = {
@@ -83,7 +84,7 @@ export class MatchTheFollowingComponent {
 
   collectData() {
     console.log(this.matchTheFollowing.value);
-    this.questionObject.paperId = localStorage.getItem('paperId').valueOf(),
+    this.questionObject.paperId = sessionStorage.getItem('paperId').valueOf(),
     this.questionReceived.push(this.matchTheFollowing.value.a);
     this.questionReceived.push(this.matchTheFollowing.value.b);
     this.questionReceived.push(this.matchTheFollowing.value.c);

@@ -1,0 +1,21 @@
+<table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Paper Name</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Difficulty Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of paper; index as i">
+        <th scope="row">{{i}}</th>
+        <td>{{p.paperName}}</td>
+        <td>{{p.paperName}}</td>
+        <td>{{p.duration}}</td>
+        <td>{{p.difficultyLevel}}</td>
+        <td><input type="button" value="Result" (click)="fetchResult(p.paperId)"></td>
+      </tr>
+    </tbody>
+  </table>

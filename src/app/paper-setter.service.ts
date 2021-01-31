@@ -8,7 +8,7 @@ export class PaperSetterService {
   url = 'http://localhost:8080/';
   constructor(private http: HttpClient) {}
 
-  jwt = localStorage.getItem('currentUser');
+  jwt = sessionStorage.getItem('currentUser');
 
   headers_object: HttpHeaders = new HttpHeaders().set(
     'Authorization',
@@ -30,6 +30,10 @@ export class PaperSetterService {
 
   getPapereToBeReviewed(paperId : Number){
     return this.http.get(this.url+'paper/details/'+paperId,this.httpOptions);
+  }
+
+  getPublishedPapers(paperSetterId : Number){
+    return this.http.get(this.url+'paper/published-paper/'+paperSetterId,this.httpOptions);
   }
 
   updatePaperStatus(paperId : Number){

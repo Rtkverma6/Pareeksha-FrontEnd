@@ -3,19 +3,19 @@ import { Router } from '@angular/router';
 import { PaperSetterService } from '../../paper-setter.service'
 
 @Component({
-  selector: 'app-publish-paper',
-  templateUrl: './publish-paper.component.html',
-  styleUrls: ['./publish-paper.component.css']
+  selector: 'app-result',
+  templateUrl: './result.component.html',
+  styleUrls: ['./result.component.css']
 })
-export class PublishPaperComponent implements OnInit {
+export class ResultComponent implements OnInit {
   paperSetterId: any
   constructor(private service: PaperSetterService, private router: Router) { }
 
   paper: any[] = [];
 
   ngOnInit(): void {
-    this.paperSetterId = sessionStorage.getItem('paperSetterId');
-    this.service.getPapereToBeReviewed(this.paperSetterId).subscribe((result: any) => {
+    this.paperSetterId = sessionStorage.getItem('paperSetterId').valueOf();
+    this.service.getPublishedPapers(this.paperSetterId).subscribe((result: any) => {
       for (let index = 0; index < result.length; index++) {
         let element = result[index];
         this.paper.push(element);
@@ -24,8 +24,9 @@ export class PublishPaperComponent implements OnInit {
     console.log(this.paper);
   }
 
-  review(paperId: any) {
-    sessionStorage.setItem('pageToBeReviewed', paperId);
-    this.router.navigate(['dashboard/publish/review']);
+  fetchResult(paperId: any) {
+    sessionStorage.setItem('resultsOfPaper', paperId);
+    this.router.navigate(['dashboard/result/paper-result']);
   }
+
 }

@@ -12,7 +12,7 @@ import { IChoice } from '../../../../model/IChoice';
   styleUrls: ['./mcq.component.css']
 })
 export class MCQComponent {
-  paperSubject: string = localStorage.getItem('paperSubject');
+  paperSubject: string = sessionStorage.getItem('paperSubject');
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
@@ -88,7 +88,7 @@ export class MCQComponent {
   }
 
   collectData() {
-    this.questionObject.paperId = localStorage.getItem('paperId').valueOf();
+    this.questionObject.paperId = sessionStorage.getItem('paperId').valueOf();
     this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();
@@ -118,7 +118,5 @@ export class MCQComponent {
       'Choice 4 : ' + this.questionObject.choices[3].choice +':' +
         this.questionObject.choices[3].isCorrect
     );
-
-
   }
 }

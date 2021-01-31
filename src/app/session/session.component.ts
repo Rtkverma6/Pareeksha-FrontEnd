@@ -8,17 +8,17 @@ import { Component } from '@angular/core';
 export class SessionComponent {
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('currentUser') == null ? false : true;
+    return sessionStorage.getItem('currentUser') == null ? false : true;
   }
   isLoggedOut(): boolean {
-    return localStorage.getItem('currentUser') == null ? true : false;
+    return sessionStorage.getItem('currentUser') == null ? true : false;
   }
 
   setLoggedInUser(username: string, icon: string): void {
-    localStorage.setItem('currentUser', username);
-    localStorage.setItem('icon', icon);
+    sessionStorage.setItem('currentUser', username);
+    sessionStorage.setItem('icon', icon);
   }
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
   }
 }

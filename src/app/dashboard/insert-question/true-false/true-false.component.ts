@@ -14,7 +14,7 @@ import { IChoice } from '../../../../model/IChoice';
 })
 export class TrueFalseComponent {
 
-  paperSubject: string = localStorage.getItem('paperSubject');
+  paperSubject: string = sessionStorage.getItem('paperSubject');
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
@@ -61,7 +61,7 @@ export class TrueFalseComponent {
   }
 
   collectData() {
-    this.questionObject.paperId = localStorage.getItem('paperId').valueOf(),
+    this.questionObject.paperId = sessionStorage.getItem('paperId').valueOf(),
     this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();

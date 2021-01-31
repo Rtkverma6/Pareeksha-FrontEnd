@@ -14,13 +14,6 @@ export class CreatePaperComponent implements OnInit {
   constructor(private service: DashboardService, private router: Router) { }
 
   ngOnInit(): void {
-    this.service.getPaperSetterId().subscribe(result => {
-      console.log('Retrived papperSetter Id: ')
-      console.log('result : ', result);
-      console.log('Setting up paperSetter id in localstorage');
-      localStorage.setItem('paperSetterId', result.toString());
-      console.log(localStorage.getItem('paperSetterId'));
-    })
   }
 
   alert: boolean = false;
@@ -28,7 +21,7 @@ export class CreatePaperComponent implements OnInit {
   level  = ['EASY', 'MEDIUM', 'HARD'];
 
   createPaper = new FormGroup({
-    paperSetterId: new FormControl(Number(localStorage.getItem('paperSetterId'))),
+    paperSetterId: new FormControl(Number(sessionStorage.getItem('paperSetterId'))),
     reviewed: new FormControl(false),
     paperName: new FormControl('', [
       Validators.required,
@@ -86,8 +79,8 @@ export class CreatePaperComponent implements OnInit {
     console.log(this.createPaper.value);
     this.service.createPaper(this.createPaper.value).subscribe((result) => {
       console.log('result : ', result);
-      localStorage.setItem('paperId', result['paperId']);
-      localStorage.setItem('paperSubject', result['paperSubject']);
+      sessionStorage.setItem('paperId', result['paperId']);
+      sessionStorage.setItem('paperSubject', result['paperSubject']);
     });
     this.alert = true;
     this.createPaper.reset();

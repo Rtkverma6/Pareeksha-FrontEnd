@@ -10,9 +10,11 @@ import { PapersetterDashboardComponent } from './papersetter-dashboard/papersett
 import { MatchTheFollowingComponent } from './insert-question/match-the-following/match-the-following.component';
 import { TrueFalseComponent } from './insert-question/true-false/true-false.component';
 import { ReviewComponent } from './publish-paper/review/review.component';
+import { ResultComponent } from './result/result.component';
+import { PaperResultComponent } from './result/paper-result/paper-result.component';
 
 @NgModule({
-  declarations: [PublishPaperComponent,MCQComponent, CreatePaperComponent, InsertQuestionComponent, PapersetterDashboardComponent, MatchTheFollowingComponent, TrueFalseComponent, ReviewComponent],
+  declarations: [PublishPaperComponent, MCQComponent, CreatePaperComponent, InsertQuestionComponent, PapersetterDashboardComponent, MatchTheFollowingComponent, TrueFalseComponent, ReviewComponent, ResultComponent, PaperResultComponent],
   imports: [
     CommonModule,
     DashBoardRoutingModule,
