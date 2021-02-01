@@ -10,6 +10,8 @@ import { Validators } from '@angular/forms';
 })
 export class SignupComponent {
   alert: boolean = false;
+  alertError: boolean = false;
+  message : string = '';
 
   registerUser = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -43,12 +45,17 @@ export class SignupComponent {
       .registerPaperSetter(this.registerUser.value)
       .subscribe((result) => {
         console.log('result', result);
-      });
-    this.alert = true;
+        this.alert = true;
+      },error =>{
+      this.message=error.error['message'];
+      this.alertError = true;
+    });
+   
     this.registerUser.reset();
   }
 
   closeAlert() {
+    this.alertError=false;
     this.alert = false;
   }
 }

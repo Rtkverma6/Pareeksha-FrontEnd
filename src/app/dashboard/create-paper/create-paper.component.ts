@@ -17,7 +17,8 @@ export class CreatePaperComponent implements OnInit {
   }
 
   alert: boolean = false;
-
+  alertError: boolean = false;
+  message : string = '';
   level  = ['EASY', 'MEDIUM', 'HARD'];
 
   createPaper = new FormGroup({
@@ -81,12 +82,18 @@ export class CreatePaperComponent implements OnInit {
       console.log('result : ', result);
       sessionStorage.setItem('paperId', result['paperId']);
       sessionStorage.setItem('paperSubject', result['paperSubject']);
+      this.message = 'Paper created Successfully';
+      this.alert = true;
+    },error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
     });
-    this.alert = true;
     this.createPaper.reset();
   }
 
   closeAlert() {
     this.alert = false;
+    this.alertError = false;
   }
 }

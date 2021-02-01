@@ -8,6 +8,7 @@ import { PaperSetterService } from '../../paper-setter.service'
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
+ 
   paperSetterId: any
   constructor(private service: PaperSetterService, private router: Router) { }
 

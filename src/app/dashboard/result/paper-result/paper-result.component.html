@@ -1,1 +1,21 @@
-<p>paper-result works!</p>
+
+<table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">PRN</th>
+        <th scope="col">Submitted On</th>
+        <th scope="col">Marks Obtained</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of papersResults; index as i">
+        <th scope="row">{{i}}</th>
+        <td>{{p.studentName}}</td>
+        <td>{{p.prn}}</td>
+        <td>{{p.submittedOn | date : 'yyyy/MM/dd hh:mm:ss'  }}</td>
+        <td>{{p.marksObtained}}</td>
+      </tr>
+    </tbody>
+  </table>

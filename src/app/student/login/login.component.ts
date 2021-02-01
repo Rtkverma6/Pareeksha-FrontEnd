@@ -10,12 +10,11 @@ import { StudentService } from 'src/app/student.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private service: StudentService, private router: Router) {  }
-  mesg : string;
+  alertError: boolean = false;
+  message : string = '';
   ngOnInit(): void {
     console.log("On load"+sessionStorage.getItem('currentPaperId'));
 }
-
-  invalidLogin: boolean = false;
 
   loginSudent = new FormGroup({
     paperId: new FormControl(Number(sessionStorage.getItem('currentPaperId'))),
@@ -51,18 +50,16 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('studentId',result['studentId']);
       console.log("set student Id"+sessionStorage.getItem('studentId'));
       sessionStorage.setItem('prn', result['prn']);
-    },
-    (error) => {
-      console.log(error);
-      this.mesg = "Invalid login!!";
-      this.invalidLogin = true;
+    },error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
     });
-    this.invalidLogin = true;
     this.loginSudent.reset();
     this.router.navigate(['student/fetchPaper'])
   }
 
   closeAlert() {
-    this.invalidLogin = false;
+    this.alertError = false;
   }
 }

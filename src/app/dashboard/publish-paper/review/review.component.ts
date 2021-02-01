@@ -11,6 +11,8 @@ import { IQuestionChoice } from 'src/model/IQuestionChoice';
 })
 export class ReviewComponent implements OnInit {
 
+  alertError: boolean = false;
+  message : string = '';
   paperId: any;
   marksObtained: number = 0;
   paperSetterId : any;
@@ -49,6 +51,10 @@ export class ReviewComponent implements OnInit {
           console.log(this.questions[0]);
         }
       });
+    },error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
     });
   }
 
@@ -57,5 +63,9 @@ export class ReviewComponent implements OnInit {
     this.paperSetterService.updatePaperStatus(this.paperId).subscribe((result) => {
       this.router.navigate(['dashboard/papersetterDashboard']);
     });
+  }
+
+  closeAlert() {
+    this.alertError = false;
   }
 }

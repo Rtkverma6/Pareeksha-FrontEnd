@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class InsertQuestionComponent {
 
+  alertError: boolean = false;
+  message : string = '';
   paperSubject: string = localStorage.getItem('paperSubject');
   questionType = ['MCQ', 'True/False', 'Match the following'];
   form: FormGroup;
@@ -44,7 +46,13 @@ export class InsertQuestionComponent {
       console.log('result', result);
       sessionStorage.setItem('questionId', result['questionId']);
       this.router.navigate(['dashboard/question/choice']);
+    },error =>{
+      this.message=error.error['message'];
+      this.alertError = true;
     });
     this.insertQuestion.reset();
+  }
+  closeAlert() {
+    this.alertError = false;
   }
 }

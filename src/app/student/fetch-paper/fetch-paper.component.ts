@@ -14,8 +14,8 @@ export class FetchPaperComponent implements OnInit {
   paperId: any;
   marksObtained: number =0;
   someDate: Date = new Date(Date.now() + 100);
-  mesg: string;
-  invalidLogin: boolean = false;
+  alertError: boolean = false;
+  message : string = '';
   ifSubmit:boolean = false;
 
   constructor(private service: StudentService, private router: Router) {}
@@ -75,11 +75,10 @@ export class FetchPaperComponent implements OnInit {
             console.log(this.questions[0]);
           }
         });
-      },
-      (error) => {
-        console.log(error);
-        this.mesg = 'Failed to fetch paper';
-        this.invalidLogin = true;
+      },error =>{
+        console.error();
+        this.message=error.error['message'];
+        this.alertError = true;
       },
       () => {
         this.someDate = new Date(Date.now() + this.paper.duration * 1000);
@@ -114,8 +113,8 @@ export class FetchPaperComponent implements OnInit {
   calculateResult() {
     if (this.answers.length != this.responses.length) {
       console.log('resubmitted response for' + "Length of resp " + this.responses.length + "ans length " + this.answers.length);
-      this.mesg = "All questions must be answered....";
-      this.invalidLogin = true;
+      this.message = "All questions must be answered....";
+      this.alertError = true;
       this.answers.length = 0;
       return;
     } else {
@@ -175,11 +174,11 @@ export class FetchPaperComponent implements OnInit {
       //Calling service to store result
       this.service.storeResult(this.paperResult).subscribe(error => {
         console.error();
-        this.invalidLogin = true;
+        this.alertError = true;
       });
     }
   }
   closeAlert() {
-    this.invalidLogin = false;
+    this.alertError = false;
   }
 }

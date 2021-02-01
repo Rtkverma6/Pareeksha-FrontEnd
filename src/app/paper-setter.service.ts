@@ -40,4 +40,8 @@ export class PaperSetterService {
     console.log(this.httpOptions);
     return this.http.get(this.url+'paper/review/'+paperId,this.httpOptions);
   }
+
+  fetchResults(paperId:Number){
+    return this.http.get(this.url+'paper/fetch-results/'+paperId,this.httpOptions);
+  }
 }

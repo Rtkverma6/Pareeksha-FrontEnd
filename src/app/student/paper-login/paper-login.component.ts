@@ -15,7 +15,8 @@ export class PaperLoginComponent implements OnInit {
    }
 
   res: any;
-  invalidLogin: boolean = false;
+  alertError: boolean = false;
+  message : string = '';
 
   loginUser = new FormGroup({
     paperId: new FormControl('', [Validators.required]),
@@ -32,19 +33,17 @@ export class PaperLoginComponent implements OnInit {
           sessionStorage.setItem('currentPaperId',result['paperId']);
           sessionStorage.setItem('totalMarks',result['totalMarks']);
           sessionStorage.setItem('totalQuestions',result['totalQuestions']);
-          this.invalidLogin = false;
           this.router.navigate(['/student/login']);
         }
-      },
-      (error) => {
-        console.log(error);
-        this.res = "Invalid login!!";
-        this.invalidLogin = true;
+      },error =>{
+        console.error();
+        this.message=error.error['message'];
+        this.alertError = true;
       }
     );
     this.loginUser.reset();
   }
   closeAlert() {
-    this.invalidLogin = false;
+    this.alertError = false;
   }
 }

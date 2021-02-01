@@ -1,6 +1,7 @@
 <h2>Exam Details </h2> <br>
-<div *ngIf="invalidLogin" class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong> {{res}} </strong>
+
+<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> {{message}} </strong>
  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

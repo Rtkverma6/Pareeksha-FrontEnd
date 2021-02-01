@@ -1,6 +1,12 @@
 <h2>Paper Details </h2>
 <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong> Paper created Successfully!!. <a href="/dashboard/question/insert"> Insert Questions </a> </strong>
+  <strong> {{message}}. <a href="/dashboard/question/insert"> Insert Questions </a> </strong>
+  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> {{message}}.</strong>
   <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -27,9 +33,13 @@
     </div>
   </div>
 
-  <select class="form-control" formControlName="difficultyLevel">
-    <option *ngFor="let difficultyLevel of level" [ngValue]="difficultyLevel">{{difficultyLevel}}</option>
-  </select>
+  <div>
+    <span>Difficulty Level</span>
+    <select class="form-control" formControlName="difficultyLevel">
+      <option *ngFor="let difficultyLevel of level" [ngValue]="difficultyLevel">{{difficultyLevel}}</option>
+    </select>
+  </div>
+  
 
   <div class="form-group">
     <label for="startDate">Start Date</label>

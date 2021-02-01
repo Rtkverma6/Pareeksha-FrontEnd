@@ -1,4 +1,12 @@
 <h4>Paper Name : {{paper.paperName}}</h4>
+
+<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong> {{message}}.</strong>
+    <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
 <form>
     <div *ngFor=" let q of paper.questions">
         <div *ngIf="q.questionType == 'MCQ' || q.questionType == 'TRUEORFALSE'">

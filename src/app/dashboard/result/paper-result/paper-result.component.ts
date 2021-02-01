@@ -9,9 +9,16 @@ import { PaperSetterService } from '../../../paper-setter.service'
 })
 export class PaperResultComponent implements OnInit {
 
-  constructor() { }
+  papersResults : any[] = [];
+  constructor(private service : PaperSetterService) { }
 
   ngOnInit(): void {
+    
+    this.service.fetchResults(Number(sessionStorage.getItem('resultsOfPaper').valueOf())).subscribe((result: any) => {
+        this.papersResults = result;
+    },error =>{
+      error.console.error();
+    });
   }
 
 }

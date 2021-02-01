@@ -8,6 +8,8 @@ import { PaperSetterService } from '../../paper-setter.service'
   styleUrls: ['./publish-paper.component.css']
 })
 export class PublishPaperComponent implements OnInit {
+  alertError: boolean = false;
+  message : string = '';
   paperSetterId: any
   constructor(private service: PaperSetterService, private router: Router) { }
 
@@ -20,6 +22,10 @@ export class PublishPaperComponent implements OnInit {
         let element = result[index];
         this.paper.push(element);
       }
+    },error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
     });
     console.log(this.paper);
   }
@@ -27,5 +33,9 @@ export class PublishPaperComponent implements OnInit {
   review(paperId: any) {
     sessionStorage.setItem('pageToBeReviewed', paperId);
     this.router.navigate(['dashboard/publish/review']);
+  }
+
+  closeAlert() {
+    this.alertError = false;
   }
 }
