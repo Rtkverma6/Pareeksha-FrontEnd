@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PaperSetterService } from '../../paper-setter.service';
+import { PaperSetterService } from '../../service/paper-setter.service';
 import { Router} from '@angular/router';
 
 @Component({
@@ -10,13 +10,6 @@ import { Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: PaperSetterService, private router: Router) {  }
-
-  ngOnInit(): void {
-    if (localStorage.getItem('currentUser') != null)
-      this.router.navigate(['/dashboard/papersetterDashboard']);
-  }
-
   jwtToken: any;
   invalidLogin: boolean = false;
 
@@ -24,6 +17,13 @@ export class LoginComponent implements OnInit {
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+
+  constructor(private service: PaperSetterService, private router: Router) {  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('currentUser') != null)
+      this.router.navigate(['/dashboard/papersetterDashboard']);
+  }
 
   collectData() {
     console.log(this.loginUser.value);

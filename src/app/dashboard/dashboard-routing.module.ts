@@ -14,13 +14,13 @@ const routes: Routes = [
   { path: 'create', component: CreatePaperComponent },
   { path: 'question/insert', component: InsertQuestionComponent },
   { path: 'papersetterDashboard', component: PapersetterDashboardComponent },
-  {path: 'publish/review', component:ReviewComponent},
-  {path:'result',component:ResultComponent},
-  {path:'result/paper-result',component:PaperResultComponent}
+  { path: 'publish/review', component: ReviewComponent },
+  { path: 'result', component: ResultComponent },
+  { path: 'result/paper-result', component: PaperResultComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashBoardRoutingModule {}
+export class DashBoardRoutingModule { }

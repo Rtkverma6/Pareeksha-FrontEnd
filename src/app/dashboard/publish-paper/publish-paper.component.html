@@ -18,10 +18,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of paper; index as i">
-        <th scope="row">{{i}}</th>
+        <th scope="row">{{i+1}}</th>
         <td>{{p.paperName}}</td>
         <td>{{p.paperName}}</td>
-        <td>{{p.duration}}</td>
+        <td>{{p.duration/60}} minutes</td>
         <td>{{p.difficultyLevel}}</td>
         <td><input type="button" value="Review" (click)="review(p.paperId)"></td>
       </tr>

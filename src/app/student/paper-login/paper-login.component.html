@@ -12,10 +12,18 @@
     <div class="form-group">
         <label for="paperId">Paper ID</label>
         <input type="number" class="form-control" id="paperId" placeholder="Enter Paper-id" formControlName="paperId" required>
+        <div *ngIf="paperId.invalid && (paperId.dirty || paperId.touched)" class="alert alert-danger">
+          <div *ngIf="paperId.errors.required"> Paper-Id is required. </div>
+        </div>
     </div>
+
     <div class="form-group">
       <label for="paperPassword">Paper Code</label>
-      <input type="password" class="form-control" id="paperPassword" placeholder="Enter Password" formControlName="paperPassword" required>
+      <input type="password" class="form-control" id="paperPassword" placeholder="Enter Code" formControlName="paperPassword" required>
+      <div *ngIf="paperPassword.invalid && (paperPassword.dirty || paperPassword.touched)" class="alert alert-danger">
+        <div *ngIf="paperPassword.errors.required"> Paper Password is required. </div>
+      </div>
     </div>
+
     <button type="submit" class="btn btn-primary" [disabled]="!loginUser.valid" >Take Exam</button>
 </form>
