@@ -18,6 +18,7 @@ export class StudentService {
     console.log('in service :' + data.paperId + ':' + data.paperPassword);
     return this.http.post(this.url + 'paper/login', data);
   }
+  
   fetchPaper(paperId: Number) {
     return this.http.get(this.url + 'paper/fetch/' + paperId);
   }
