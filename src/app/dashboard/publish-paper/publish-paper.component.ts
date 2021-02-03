@@ -41,6 +41,10 @@ export class PublishPaperComponent implements OnInit {
     this.router.navigate(['dashboard/publish/review']);
   }
 
+  downloadPaper(paperId:any){
+    this.service.downloadPaper(paperId).subscribe();
+  }
+
   closeAlert() {
     this.alertError = false;
   }

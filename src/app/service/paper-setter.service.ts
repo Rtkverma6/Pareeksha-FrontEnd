@@ -28,6 +28,10 @@ export class PaperSetterService {
     return this.http.post(this.url + 'papersetter/login', data);
   }
 
+  fetchUnReviewedPaper(paperId:Number){
+    return this.http.get(this.url + 'paper/to-review/' + paperId,this.httpOptions);  
+  }
+
   getPapereToBeReviewed(paperId : Number){
     return this.http.get(this.url+'paper/details/'+paperId,this.httpOptions);
   }
@@ -43,5 +47,9 @@ export class PaperSetterService {
 
   fetchResults(paperId:Number){
     return this.http.get(this.url+'paper/fetch-results/'+paperId,this.httpOptions);
+  }
+
+  downloadPaper(paperId:Number){
+    return this.http.get(this.url+'paper/download/'+paperId,this.httpOptions);
   }
 }

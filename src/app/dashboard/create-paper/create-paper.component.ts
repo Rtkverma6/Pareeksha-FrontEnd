@@ -88,7 +88,7 @@ export class CreatePaperComponent {
       sessionStorage.setItem('totalQuestions', result['totalQuestions'])
       alert('Paper created Successfully. Please Insert Questions now');
       this.router.navigate(['dashboard/question/insert']);
-    }, error => {
+    }, (error) => {
       console.error();
       alert(error.error['message']);
     });

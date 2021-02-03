@@ -39,7 +39,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.paperId = sessionStorage.getItem('pageToBeReviewed');
-    this.service.fetchUnReviewedPaper(this.paperId).subscribe((result) => {
+    this.paperSetterService.fetchUnReviewedPaper(this.paperId).subscribe((result) => {
       console.log(result['paperName']);
       this.paper = result;
       console.log(this.paper.paperName);

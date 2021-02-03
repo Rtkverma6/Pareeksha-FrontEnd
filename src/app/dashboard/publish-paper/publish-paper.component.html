@@ -24,6 +24,7 @@
         <td>{{p.duration/60}} minutes</td>
         <td>{{p.difficultyLevel}}</td>
         <td><input type="button" value="Review" (click)="review(p.paperId)"></td>
+        <td><input type="button" value="Download" (click)="downloadPaper(p.paperId)"></td>
       </tr>
     </tbody>
   </table>

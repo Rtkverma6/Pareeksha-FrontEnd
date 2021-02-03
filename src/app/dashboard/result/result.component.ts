@@ -19,6 +19,7 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     this.paperSetterId = sessionStorage.getItem('paperSetterId').valueOf();
     this.service.getPublishedPapers(this.paperSetterId).subscribe((result: any) => {
+      console.log(result.length);
       if(result.length == 0 )
       {
         this.message="Nobody has attempted the paper yet";

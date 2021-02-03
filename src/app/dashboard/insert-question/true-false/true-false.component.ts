@@ -70,15 +70,20 @@ export class TrueFalseComponent {
       .addQuestion(this.questionObject)
       .subscribe((result) => {
         console.log('result', result);
+        
+      }, error => {
+        if(error.error['message'] == NaN){
+          alert(error.error['message']);
+        }
       });
-    this.insertQuestion.reset();
-    sessionStorage.setItem('totalQuestions',(Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
-    alert('Question Inserted');
-    if(Number(sessionStorage.getItem('totalQuestions')) == 0 )
-    {
-      console.log('in total Questions');
-      alert('All questions inserted successfully');
-      this.router.navigate(['dashboard/publish']);
-    }      
+      this.insertQuestion.reset();
+        sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+      alert('Question Inserted');
+      if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+        console.log('in total Questions');
+        alert('All questions inserted successfully');
+        this.router.navigate(['dashboard/publish']);
+      }
+      this.router.navigate(['dashboard/question/insert']);
   }
 }

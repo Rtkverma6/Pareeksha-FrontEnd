@@ -98,7 +98,7 @@ export class MatchTheFollowingComponent {
   collectData() {
     console.log(this.matchTheFollowing.value);
     this.questionObject.paperId = sessionStorage.getItem('paperId').valueOf(),
-    this.questionReceived.push(this.matchTheFollowing.value.a);
+      this.questionReceived.push(this.matchTheFollowing.value.a);
     this.questionReceived.push(this.matchTheFollowing.value.b);
     this.questionReceived.push(this.matchTheFollowing.value.c);
     this.questionReceived.push(this.matchTheFollowing.value.d);
@@ -113,9 +113,11 @@ export class MatchTheFollowingComponent {
 
     this.service.addQuestion(this.questionObject).subscribe((result) => {
       console.log(result);
+     
     }, error => {
-      console.error();
-      alert(error.error['message']);
+      if (error.error['message'] == NaN) {
+        alert(error.error['message']);
+      }
     });
     this.matchTheFollowing.reset();
     sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
@@ -125,5 +127,6 @@ export class MatchTheFollowingComponent {
       alert('All questions inserted successfully');
       this.router.navigate(['dashboard/publish']);
     }
+    this.router.navigate(['dashboard/question/insert']);
   }
 }

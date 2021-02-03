@@ -94,40 +94,23 @@ export class MCQComponent {
     this.service
       .addQuestion(this.questionObject)
       .subscribe((result) => {
-        console.log('result', result);
-      }, error => {
-        console.error();
-        alert(error.error['message']);
+         console.log('result', result);
+      }, (error) => {
+        if(error.error['message'] == NaN){
+          alert(error.error['message']);
+        }
       }
       );
-    this.insertQuestion.reset();
-    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+    
+      this.insertQuestion.reset();
+      sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
     alert('Question Inserted');
     if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
       console.log('in total Questions');
       alert('All questions inserted successfully');
       this.router.navigate(['dashboard/publish']);
     }
-
-    console.log(this.insertQuestion.value);
-    console.log("question : " + this.questionObject.question);
-    console.log("Points :" + this.questionObject.points);
-
-    console.log(
-      'Choice 1 : ' + this.questionObject.choices[0].choice + ':' +
-      this.questionObject.choices[0].isCorrect
-    );
-    console.log(
-      'Choice 2 : ' + this.questionObject.choices[1].choice + ':' +
-      this.questionObject.choices[1].isCorrect
-    );
-    console.log(
-      'Choice 3 : ' + this.questionObject.choices[2].choice + ':' +
-      this.questionObject.choices[2].isCorrect
-    );
-    console.log(
-      'Choice 4 : ' + this.questionObject.choices[3].choice + ':' +
-      this.questionObject.choices[3].isCorrect
-    );
+    this.questionObject.choices = [];
+    this.router.navigate(['dashboard/question/insert']);
   }
 }
