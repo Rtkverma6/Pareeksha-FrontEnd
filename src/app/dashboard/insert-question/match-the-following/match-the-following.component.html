@@ -41,36 +41,36 @@
       <td><input type="text" class="form-control" name="m" id="m" formControlName="m" required></td>
     </tr>
   </table> <br>
-  <h5>Please check correct option</h5>
+  <h5>Choices ( Check atleast one correct answer )</h5>
   <table class="table">
     <tr>
       <th width="5%" ></th>
       <th width="80%" ></th>
     </tr>
     <tr>
-      <td><input type="checkbox" id="isCorrect" name="isCorrect1" formControlName="isCorrect1">
+      <td><input type="checkbox" id="isCorrect" name="isCorrect1" (change)="changeEvent1($event)" formControlName="isCorrect1">
       </td>
       <td> <input class="form-control" type="text" name="choice1" id="choice1" formControlName="choice1" required>
       </td>  
     </tr>
     <tr>
-      <td><input type="checkbox" id="isCorrect" name="isCorrect2" formControlName="isCorrect2">
+      <td><input type="checkbox" id="isCorrect" name="isCorrect2" (change)="changeEvent2($event)" formControlName="isCorrect2">
       </td>
       <td> <input class="form-control" type="text" name="choice2" id="choice2" formControlName="choice2" required>
       </td>
     </tr>
     <tr>
-      <td><input type="checkbox" id="isCorrect" name="isCorrect3" formControlName="isCorrect3">
+      <td><input type="checkbox" id="isCorrect" name="isCorrect3" (change)="changeEvent3($event)" formControlName="isCorrect3">
       </td>
       <td> <input class="form-control" type="text" name="choice3" id="choice3" formControlName="choice3" required>
       </td>
     </tr>
     <tr>
-      <td><input type="checkbox" id="isCorrect" name="isCorrect4" formControlName="isCorrect4">
+      <td><input type="checkbox" id="isCorrect" name="isCorrect4" (change)="changeEvent4($event)" formControlName="isCorrect4">
       </td>
       <td><input class="form-control" type="text" name="choice4" id="choice4" formControlName="choice4" required>
       </td>
     </tr>
   </table>
-  <button type="submit" class="btn btn-primary" [disabled]="!matchTheFollowing.valid">Insert</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!matchTheFollowing.valid || (isCheck1 && isCheck2 && isCheck3 && isCheck4) ">Insert</button>
 </form>

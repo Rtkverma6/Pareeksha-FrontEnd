@@ -17,12 +17,13 @@
       <div *ngIf="points.errors.required"> Points are required. </div>
     </div>
   </div>
+<div> <strong> Please select only one correct answer </strong> </div> <br>
 
   <div class="form-group">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect1" formControlName="isCorrect1">
+          <input type="checkbox" id="isCorrect1" formControlName="isCorrect1" (change)="changeEvent($event)">
         </div>
       </div>
       &nbsp; True
@@ -33,12 +34,12 @@
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect2" formControlName="isCorrect2">
+          <input type="checkbox" id="isCorrect2" formControlName="isCorrect2" (change)="changeEvent($event)" >
         </div>
       </div>
       &nbsp; False
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Insert</button>
+  <button [disabled] ="toggleInsert" type="submit" class="btn btn-primary">Insert</button>
 </form>

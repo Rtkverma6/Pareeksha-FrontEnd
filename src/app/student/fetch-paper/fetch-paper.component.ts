@@ -11,6 +11,7 @@ import { error } from 'protractor';
   styleUrls: ['./fetch-paper.component.css'],
 })
 export class FetchPaperComponent implements OnInit {
+
   paperId: any;
   marksObtained: number = 0;
   someDate: Date = new Date(Date.now() + 100);
@@ -26,7 +27,9 @@ export class FetchPaperComponent implements OnInit {
     duration: 0,
     questions: []
   }
+
   repeate: boolean = false;
+
   questions: any[] = [];
 
   paperResult: any = {
@@ -85,6 +88,7 @@ export class FetchPaperComponent implements OnInit {
       }
     );
   }
+  
   myTriggerFunction() {
     console.log('triggered!');
     this.result();

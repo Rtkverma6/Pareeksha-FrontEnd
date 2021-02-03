@@ -8,7 +8,6 @@ import { ReviewComponent } from './publish-paper/review/review.component';
 import { ResultComponent } from "./result/result.component";
 import { PaperResultComponent } from "./result/paper-result/paper-result.component";
 
-
 const routes: Routes = [
   { path: 'publish', component: PublishPaperComponent },
   { path: 'create', component: CreatePaperComponent },
@@ -16,7 +15,7 @@ const routes: Routes = [
   { path: 'papersetterDashboard', component: PapersetterDashboardComponent },
   { path: 'publish/review', component: ReviewComponent },
   { path: 'result', component: ResultComponent },
-  { path: 'result/paper-result', component: PaperResultComponent }
+  { path: 'result/paper-result', component: PaperResultComponent },
 ];
 
 @NgModule({

@@ -19,11 +19,13 @@
   </div>
 
   <div class="form-group">
-    <label for="choice1">Choices</label>
+    <label for="choice1"> <strong>Choices (Please check atleast one correct answer)</strong>  </label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect1" formControlName="isCorrect1">
+          <label  >
+          <input type="checkbox" id="isCorrect1" formControlName="isCorrect1" (change)="changeEvent1($event)" > 
+          </label>
         </div>
       </div>
       <input type="text" class="form-control" id="choice1" placeholder="Enter Choice" formControlName="choice1"
@@ -35,11 +37,10 @@
   </div>
 
   <div class="form-group">
-    <label for="choice2">Choices</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect2" formControlName="isCorrect2">
+          <input type="checkbox" id="isCorrect2" formControlName="isCorrect2" (change)="changeEvent2($event)">
         </div>
       </div>
       <input type="text" class="form-control" id="choice2" placeholder="Enter Choice" formControlName="choice2"
@@ -51,11 +52,10 @@
   </div>
 
   <div class="form-group">
-    <label for="choice3">Choices</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect3" formControlName="isCorrect3">
+          <input type="checkbox" id="isCorrect3" formControlName="isCorrect3" (change)="changeEvent3($event)">
         </div>
       </div>
       <input type="text" class="form-control" id="choice3" placeholder="Enter Choice" formControlName="choice3"
@@ -67,11 +67,10 @@
   </div>
 
   <div class="form-group">
-    <label for="choice4">Choices</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="checkbox" id="isCorrect4" formControlName="isCorrect4">
+          <input type="checkbox" id="isCorrect4" formControlName="isCorrect4" (change)="changeEvent4($event)">
         </div>
       </div>
       <input type="text" class="form-control" id="choice4" placeholder="Enter Choice" formControlName="choice4"
@@ -83,5 +82,5 @@
   </div>
 
   <button type="submit" class="btn btn-primary" [ngClass]="{'my-color': !insertQuestion.valid}"
-    [disabled]="!insertQuestion.valid">Insert</button>
+    [disabled]="!insertQuestion.valid || (isCheck1 && isCheck2 && isCheck3 && isCheck4) ">Insert</button>
 </form>

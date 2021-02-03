@@ -37,8 +37,8 @@ export class PaperLoginComponent {
           console.log(result);
           this.res = result;
           sessionStorage.setItem('currentPaperId', result['paperId']);
-          sessionStorage.setItem('totalMarks', result['totalMarks']);
-          sessionStorage.setItem('totalQuestions', result['totalQuestions']);
+          // sessionStorage.setItem('totalMarks', result['totalMarks']);
+          // sessionStorage.setItem('totalQuestions', result['totalQuestions']);
           this.router.navigate(['/student/login']);
         }
       }, error => {

@@ -48,10 +48,10 @@ export class LoginComponent implements OnInit {
     this.loginData.paperId = sessionStorage.getItem('currentPaperId');
     console.log("Login data" + this.loginData)
     this.service.addStudent(this.loginSudent.value).subscribe((result) => {
-      console.log('result : ', result);
-      sessionStorage.setItem('studentName', result['studentName']);
+      // console.log('result : ', result);
+      // sessionStorage.setItem('studentName', result['studentName']);
       sessionStorage.setItem('studentId', result['studentId']);
-      console.log("set student Id" + sessionStorage.getItem('studentId'));
+      //console.log("set student Id" + sessionStorage.getItem('studentId'));
       sessionStorage.setItem('prn', result['prn']);
     }, error => {
       console.error();

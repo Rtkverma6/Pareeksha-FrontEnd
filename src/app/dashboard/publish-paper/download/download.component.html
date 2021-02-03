@@ -1,0 +1,60 @@
+<div id="content">
+    <h4>Paper Name : {{paper.paperName}}</h4>
+
+    <div *ngFor="let q of paper.questions ; index as i">
+        <div *ngIf="q.questionType == 'MCQ' || q.questionType == 'TRUEORFALSE'">
+            <hr>
+            <p id="{{q.questionId}}">{{i+1}}.&nbsp;{{q.question}}</p>
+            <hr>
+            <div *ngFor="let c of q.choices">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input disabled type="checkbox">
+                        </div>
+                    </div>
+                    <p>&nbsp;{{c.choice}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="q.questionType == 'MATCHTHEFOLLOWING'">
+            <hr>
+            <p>{{i+1}}.&nbsp; Match The Following</p>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>{{questions[0]}}</td>
+                        <td>{{questions[1]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[2]}}</td>
+                        <td>{{questions[3]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[4]}}</td>
+                        <td>{{questions[5]}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{questions[6]}}</td>
+                        <td>{{questions[7]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div *ngFor="let c of q.choices">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input disabled type="checkbox">
+                        </div>
+                    </div>
+                    <p>&nbsp;{{c.choice}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br>
+<button class="btn btn-primary" (click)="downloadPdf()">Download pdf</button>
+<br><br>
