@@ -15,6 +15,7 @@ import { IChoice } from '../../../../model/IChoice';
 export class TrueFalseComponent {
 
   paperSubject: string = sessionStorage.getItem('paperSubject');
+  toggleInsert:boolean = true;
 
   constructor(private service: DashboardService, private router: Router) { }
 
@@ -70,15 +71,29 @@ export class TrueFalseComponent {
       .addQuestion(this.questionObject)
       .subscribe((result) => {
         console.log('result', result);
+      },error => {
+        if(error.error['message'] == NaN){
+          alert(error.error['message']);
+        }
       });
     this.insertQuestion.reset();
     sessionStorage.setItem('totalQuestions',(Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
     alert('Question Inserted');
+    this.questionObject.choices = [];
+
     if(Number(sessionStorage.getItem('totalQuestions')) == 0 )
     {
       console.log('in total Questions');
       alert('All questions inserted successfully');
       this.router.navigate(['dashboard/publish']);
     }      
+  }
+  changeEvent(event){
+    if (event.target.checked) {
+      this.toggleInsert = !this.toggleInsert;
+    }
+    else {
+         this.toggleInsert= !this.toggleInsert;
+    }
   }
 }
