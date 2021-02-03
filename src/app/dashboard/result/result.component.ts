@@ -42,6 +42,10 @@ export class ResultComponent implements OnInit {
     sessionStorage.setItem('resultsOfPaper', paperId);
     this.router.navigate(['dashboard/result/paper-result']);
   }
+  downloadResult(paperId: any) {
+    sessionStorage.setItem('resultsOfPaper', paperId);
+    this.router.navigate(['dashboard/result/downloadResult']);
+  }
 
   closeAlert() {
     this.alertError = false;

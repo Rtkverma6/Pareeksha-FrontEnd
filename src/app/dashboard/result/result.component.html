@@ -19,10 +19,10 @@
       <tr *ngFor="let p of paper; index as i">
         <th scope="row">{{i+1}}</th>
         <td>{{p.paperName}}</td>
-        <td>{{p.paperName}}</td>
+        <td>{{p.paperSubject}}</td>
         <td>{{p.duration}}</td>
         <td>{{p.difficultyLevel}}</td>
-        <td><input type="button" value="Result" (click)="fetchResult(p.paperId)"></td>
+        <td><input type="button" value="View Result" (click)="fetchResult(p.paperId)"></td>
       </tr>
     </tbody>
   </table>

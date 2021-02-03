@@ -12,7 +12,13 @@ import { IQuestion } from '../../../../model/IQuestion';
   styleUrls: ['./match-the-following.component.css'],
 })
 export class MatchTheFollowingComponent {
+
   paperSubject: string = sessionStorage.getItem('paperSubject');
+  isCheck1:boolean = true;
+  isCheck2:boolean = true;
+  isCheck3:boolean = true;
+  isCheck4:boolean = true;
+
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
@@ -115,18 +121,51 @@ export class MatchTheFollowingComponent {
       console.log(result);
      
     }, error => {
-      if (error.error['message'] == NaN) {
+      if(error.error['message'] == NaN){
         alert(error.error['message']);
       }
+
     });
     this.matchTheFollowing.reset();
     sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
     alert('Question Inserted');
+    this.questionObject.choices = [];
+
     if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
       console.log('in total Questions');
       alert('All questions inserted successfully');
       this.router.navigate(['dashboard/publish']);
     }
     this.router.navigate(['dashboard/question/insert']);
+  }
+  changeEvent1(event:any){
+    if (event.target.checked) {
+      this.isCheck1 = false;
+    }
+    else {
+         this.isCheck1= true;
+    }
+  }
+  changeEvent2(event:any){
+    if (event.target.checked) {
+      this.isCheck2 = false;
+    }
+    else {
+         this.isCheck2= true;
+    }
+  }changeEvent3(event:any){
+    if (event.target.checked) {
+      this.isCheck3 = false;
+    }
+    else {
+         this.isCheck3= true;
+    }
+  }changeEvent4(event:any){
+    if (event.target.checked) {
+      this.isCheck4 = false;
+    }
+    else {
+         this.isCheck4= true;
+    }
   }
 }

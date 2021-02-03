@@ -15,6 +15,7 @@ import { IChoice } from '../../../../model/IChoice';
 export class TrueFalseComponent {
 
   paperSubject: string = sessionStorage.getItem('paperSubject');
+  toggleInsert:boolean = true;
 
   constructor(private service: DashboardService, private router: Router) { }
 
@@ -85,5 +86,13 @@ export class TrueFalseComponent {
         this.router.navigate(['dashboard/publish']);
       }
       this.router.navigate(['dashboard/question/insert']);
+  }
+  changeEvent(event){
+    if (event.target.checked) {
+      this.toggleInsert = !this.toggleInsert;
+    }
+    else {
+         this.toggleInsert= !this.toggleInsert;
+    }
   }
 }

@@ -40,6 +40,10 @@ export class PublishPaperComponent implements OnInit {
     sessionStorage.setItem('pageToBeReviewed', paperId);
     this.router.navigate(['dashboard/publish/review']);
   }
+  download(paperId: any) {
+    // sessionStorage.setItem('paperToBeDownloaded', paperId);
+    // this.router.navigate(['dashboard/publish/download']);
+  }
 
   downloadPaper(paperId:any){
     this.service.downloadPaper(paperId).subscribe();
