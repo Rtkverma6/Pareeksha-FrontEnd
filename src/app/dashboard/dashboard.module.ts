@@ -18,7 +18,7 @@ import { PaperResultComponent } from './result/paper-result/paper-result.compone
   imports: [
     CommonModule,
     DashBoardRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     PublishPaperComponent,

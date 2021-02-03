@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DashboardService } from 'src/app/dashboard.service';
+import { DashboardService } from 'src/app/service/dashboard.service';
 import { IChoice } from 'src/model/IChoice';
 import { IQuestion } from '../../../../model/IQuestion';
 
@@ -13,14 +13,14 @@ import { IQuestion } from '../../../../model/IQuestion';
 })
 export class MatchTheFollowingComponent {
   paperSubject: string = sessionStorage.getItem('paperSubject');
-  constructor(private service: DashboardService, private router: Router) {}
+  constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
     paperId: 0,
     question: '',
     points: 0,
     choices: [],
-    questionType : "MATCHTHEFOLLOWING"
+    questionType: "MATCHTHEFOLLOWING"
   };
 
   choiceObject: IChoice = {
@@ -56,6 +56,19 @@ export class MatchTheFollowingComponent {
   get points() {
     return this.matchTheFollowing.get('points');
   }
+  get choice1() {
+    return this.matchTheFollowing.get('choice1');
+  }
+  get choice2() {
+    return this.matchTheFollowing.get('choice2');
+  }
+  get choice3() {
+    return this.matchTheFollowing.get('choice3');
+  }
+  get choice4() {
+    return this.matchTheFollowing.get('choice4');
+  }
+
   addChoices() {
     this.choiceObject = {
       choice: this.matchTheFollowing.value.choice1,
@@ -100,7 +113,17 @@ export class MatchTheFollowingComponent {
 
     this.service.addQuestion(this.questionObject).subscribe((result) => {
       console.log(result);
+    }, error => {
+      console.error();
+      alert(error.error['message']);
     });
     this.matchTheFollowing.reset();
+    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+    alert('Question Inserted');
+    if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+      console.log('in total Questions');
+      alert('All questions inserted successfully');
+      this.router.navigate(['dashboard/publish']);
+    }
   }
 }

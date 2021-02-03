@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DashboardService } from '../../../dashboard.service';
+import { DashboardService } from '../../../service/dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IQuestion } from '../../../../model/IQuestion';
@@ -12,15 +12,15 @@ import { IChoice } from '../../../../model/IChoice';
   styleUrls: ['./mcq.component.css']
 })
 export class MCQComponent {
-  paperSubject: string = sessionStorage.getItem('paperSubject');
+
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
-    paperId:0,
+    paperId: 0,
     question: '',
     points: 0,
     choices: [],
-    questionType : "MCQ"
+    questionType: "MCQ"
   }
 
   choiceObject: IChoice = {
@@ -36,7 +36,7 @@ export class MCQComponent {
     choice2: new FormControl('', [Validators.required]),
     isCorrect2: new FormControl(false),
     choice3: new FormControl('', [Validators.required]),
-    isCorrect3:new FormControl(false),
+    isCorrect3: new FormControl(false),
     choice4: new FormControl('', [Validators.required]),
     isCorrect4: new FormControl(false),
   });
@@ -47,17 +47,16 @@ export class MCQComponent {
   get points() {
     return this.insertQuestion.get('points');
   }
-
-  get choice1(){
+  get choice1() {
     return this.insertQuestion.get('choice1');
   }
-  get choice2(){
+  get choice2() {
     return this.insertQuestion.get('choice2');
   }
-  get choice3(){
+  get choice3() {
     return this.insertQuestion.get('choice3');
   }
-  get choice4(){
+  get choice4() {
     return this.insertQuestion.get('choice4');
   }
 
@@ -96,27 +95,39 @@ export class MCQComponent {
       .addQuestion(this.questionObject)
       .subscribe((result) => {
         console.log('result', result);
-      });
+      }, error => {
+        console.error();
+        alert(error.error['message']);
+      }
+      );
     this.insertQuestion.reset();
+    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+    alert('Question Inserted');
+    if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+      console.log('in total Questions');
+      alert('All questions inserted successfully');
+      this.router.navigate(['dashboard/publish']);
+    }
+
     console.log(this.insertQuestion.value);
     console.log("question : " + this.questionObject.question);
-    console.log("POints :" + this.questionObject.points);
+    console.log("Points :" + this.questionObject.points);
 
     console.log(
-      'Choice 1 : ' + this.questionObject.choices[0].choice +':' +
-        this.questionObject.choices[0].isCorrect
+      'Choice 1 : ' + this.questionObject.choices[0].choice + ':' +
+      this.questionObject.choices[0].isCorrect
     );
     console.log(
-      'Choice 2 : ' + this.questionObject.choices[1].choice +':' +
-        this.questionObject.choices[1].isCorrect
+      'Choice 2 : ' + this.questionObject.choices[1].choice + ':' +
+      this.questionObject.choices[1].isCorrect
     );
     console.log(
-      'Choice 3 : ' + this.questionObject.choices[2].choice +':' +
-        this.questionObject.choices[2].isCorrect
+      'Choice 3 : ' + this.questionObject.choices[2].choice + ':' +
+      this.questionObject.choices[2].isCorrect
     );
     console.log(
-      'Choice 4 : ' + this.questionObject.choices[3].choice +':' +
-        this.questionObject.choices[3].isCorrect
+      'Choice 4 : ' + this.questionObject.choices[3].choice + ':' +
+      this.questionObject.choices[3].isCorrect
     );
   }
 }

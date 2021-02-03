@@ -1,16 +1,4 @@
 <h2>Paper Details </h2>
-<div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong> {{message}}. <a href="/dashboard/question/insert"> Insert Questions </a> </strong>
-  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong> {{message}}.</strong>
-  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
 <form [formGroup]="createPaper" (ngSubmit)="collectData()">
   <div class="form-group">

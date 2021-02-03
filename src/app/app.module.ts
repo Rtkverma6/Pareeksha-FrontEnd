@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PaperSetterModule } from './paper-setter/paper-setter.module';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './error-handler/page-not-found.component';
 import { StudentModule } from './student/student.module';
 import { HomeModule } from "./home/home.module";
 import { SessionComponent } from './session/session.component';
