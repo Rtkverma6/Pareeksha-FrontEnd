@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StudentService } from '../../student.service';
+import { StudentService } from '../../service/student.service';
 import { IQuestionChoice } from 'src/model/IQuestionChoice';
 import { IAnswer } from 'src/model/IAnswer';
 import { error } from 'protractor';
@@ -12,13 +12,13 @@ import { error } from 'protractor';
 })
 export class FetchPaperComponent implements OnInit {
   paperId: any;
-  marksObtained: number =0;
+  marksObtained: number = 0;
   someDate: Date = new Date(Date.now() + 100);
   alertError: boolean = false;
-  message : string = '';
-  ifSubmit:boolean = false;
+  message: string = '';
+  ifSubmit: boolean = false;
 
-  constructor(private service: StudentService, private router: Router) {}
+  constructor(private service: StudentService, private router: Router) { }
 
   paper: any = {
     paperName: '',
@@ -29,11 +29,11 @@ export class FetchPaperComponent implements OnInit {
   repeate: boolean = false;
   questions: any[] = [];
 
-  paperResult : any = {
-    studentId : 0,
-    marksObtained : 0,
-    resp : [] ,
-    submittedOn : new Date()
+  paperResult: any = {
+    studentId: 0,
+    marksObtained: 0,
+    resp: [],
+    submittedOn: new Date()
   };
 
   questionAndChoice: IQuestionChoice = {
@@ -65,7 +65,7 @@ export class FetchPaperComponent implements OnInit {
   ngOnInit(): void {
     this.responses.length = 0;
     this.paperId = sessionStorage.getItem('currentPaperId');
-    console.log("onLoad student Id"+sessionStorage.getItem('studentId'));
+    console.log("onLoad student Id" + sessionStorage.getItem('studentId'));
     this.service.fetchPaper(this.paperId).subscribe(
       (result) => {
         this.paper = result;
@@ -75,9 +75,9 @@ export class FetchPaperComponent implements OnInit {
             console.log(this.questions[0]);
           }
         });
-      },error =>{
+      }, error => {
         console.error();
-        this.message=error.error['message'];
+        this.message = error.error['message'];
         this.alertError = true;
       },
       () => {
@@ -122,7 +122,7 @@ export class FetchPaperComponent implements OnInit {
         this.responses.forEach(res => {
           if (ans.questionId == res.questionId) {
             if (ans.selectedChoiceId == res.selectedChoiceId) {
-              console.log("In Calcualate fun *****************"+this.marksObtained);
+              console.log("In Calcualate fun *****************" + this.marksObtained);
               this.marksObtained += ans.point;
             }
             this.ifSubmit = true;
@@ -161,21 +161,25 @@ export class FetchPaperComponent implements OnInit {
     console.log(this.responses);
     this.filterQuestionsAndItsAnswers();
     this.calculateResult();
-    if(this.ifSubmit == true){
-      console.log("In student Id"+sessionStorage.getItem('studentId'));
-      this.paperResult.studentId =sessionStorage.getItem('studentId');
+
+    if (this.ifSubmit == true) {
+      console.log("In student Id" + sessionStorage.getItem('studentId'));
+      this.paperResult.studentId = sessionStorage.getItem('studentId');
       this.paperResult.marksObtained = this.marksObtained;
       this.paperResult.resp = this.responses;
       this.paperResult.resp.array;
+
       console.log(this.paperResult.resp);
-      sessionStorage.setItem('marksObtained',this.paperResult.marksObtained);
+      sessionStorage.setItem('marksObtained', this.paperResult.marksObtained);
       console.log(" Submitting Toatal Marks Obtained" + this.marksObtained);
-      
+
       //Calling service to store result
       this.service.storeResult(this.paperResult).subscribe(error => {
         console.error();
         this.alertError = true;
       });
+      alert('Paper Submitted Successfully');
+      this.router.navigate(['']);      
     }
   }
   closeAlert() {

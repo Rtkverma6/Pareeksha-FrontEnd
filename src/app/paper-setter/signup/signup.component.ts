@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PaperSetterService } from '../../paper-setter.service';
+import { PaperSetterService } from '../../service/paper-setter.service';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,10 +10,9 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  alert: boolean = false;
-  alertError: boolean = false;
-  message : string = '';
 
+  constructor(private service: PaperSetterService,private router:Router) { }
+  
   registerUser = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
@@ -37,25 +37,19 @@ export class SignupComponent {
     return this.registerUser.get('dob');
   }
 
-  constructor(private service: PaperSetterService) {}
-
   collectData() {
     console.log(this.registerUser.value);
     this.service
       .registerPaperSetter(this.registerUser.value)
       .subscribe((result) => {
         console.log('result', result);
-        this.alert = true;
-      },error =>{
-      this.message=error.error['message'];
-      this.alertError = true;
-    });
-   
+        alert("Registration Successfull");
+        this.router.navigate(['paperSetter/login']);
+      }, error => {
+        alert(error.error['message']);
+      });
+
     this.registerUser.reset();
   }
 
-  closeAlert() {
-    this.alertError=false;
-    this.alert = false;
-  }
 }

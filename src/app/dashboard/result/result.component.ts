@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaperSetterService } from '../../paper-setter.service'
+import { PaperSetterService } from '../../service/paper-setter.service'
 
 @Component({
   selector: 'app-result',
@@ -10,17 +10,29 @@ import { PaperSetterService } from '../../paper-setter.service'
 export class ResultComponent implements OnInit {
  
   paperSetterId: any
-  constructor(private service: PaperSetterService, private router: Router) { }
-
+  alertError: boolean = false;
+  message : string = '';
   paper: any[] = [];
+ 
+  constructor(private service: PaperSetterService, private router: Router) { }
 
   ngOnInit(): void {
     this.paperSetterId = sessionStorage.getItem('paperSetterId').valueOf();
     this.service.getPublishedPapers(this.paperSetterId).subscribe((result: any) => {
+      if(result.length == 0 )
+      {
+        this.message="Nobody has attempted the paper yet";
+        this.alertError =true;
+      }
+      
       for (let index = 0; index < result.length; index++) {
         let element = result[index];
         this.paper.push(element);
       }
+    },error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
     });
     console.log(this.paper);
   }
@@ -28,6 +40,10 @@ export class ResultComponent implements OnInit {
   fetchResult(paperId: any) {
     sessionStorage.setItem('resultsOfPaper', paperId);
     this.router.navigate(['dashboard/result/paper-result']);
+  }
+
+  closeAlert() {
+    this.alertError = false;
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DashboardService } from '../../../dashboard.service';
+import { DashboardService } from '../../../service/dashboard.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IQuestion } from '../../../../model/IQuestion';
@@ -15,6 +15,7 @@ import { IChoice } from '../../../../model/IChoice';
 export class TrueFalseComponent {
 
   paperSubject: string = sessionStorage.getItem('paperSubject');
+
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
@@ -31,7 +32,6 @@ export class TrueFalseComponent {
   }
 
   insertQuestion = new FormGroup({
-
     question: new FormControl('', [Validators.required]),
     points: new FormControl('', [Validators.required]),
     choice1: new FormControl('', [Validators.required]),
@@ -46,6 +46,7 @@ export class TrueFalseComponent {
   get points() {
     return this.insertQuestion.get('points');
   }
+
   addChoices() {
     this.choiceObject = {
       choice: 'True',
@@ -71,6 +72,13 @@ export class TrueFalseComponent {
         console.log('result', result);
       });
     this.insertQuestion.reset();
-
+    sessionStorage.setItem('totalQuestions',(Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+    alert('Question Inserted');
+    if(Number(sessionStorage.getItem('totalQuestions')) == 0 )
+    {
+      console.log('in total Questions');
+      alert('All questions inserted successfully');
+      this.router.navigate(['dashboard/publish']);
+    }      
   }
 }

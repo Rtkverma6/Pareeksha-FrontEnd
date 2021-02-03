@@ -1,13 +1,6 @@
 <h2>Insert Question </h2>
-<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong> {{message}}.</strong>
-  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
 <p>Subject : {{paperSubject}}</p>
-
 <label>Question Type:</label>
 
 <form [formGroup]="form">

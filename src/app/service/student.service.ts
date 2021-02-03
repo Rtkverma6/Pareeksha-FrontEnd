@@ -21,7 +21,9 @@ export class StudentService {
   fetchPaper(paperId: Number) {
     return this.http.get(this.url + 'paper/fetch/' + paperId);
   }
-
+  fetchUnReviewedPaper(paperId:Number){
+    return this.http.get(this.url + 'paper/to-review/' + paperId);  
+  }
   storeResult(data: any) {
     return this.http.post(this.url + 'student/result', data);
   }

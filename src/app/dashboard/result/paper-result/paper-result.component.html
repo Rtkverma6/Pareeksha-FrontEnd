@@ -1,3 +1,9 @@
+<div *ngIf="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> {{message}}.</strong>
+  <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 <table class="table table-bordered table-dark">
     <thead>
@@ -11,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of papersResults; index as i">
-        <th scope="row">{{i}}</th>
+        <th scope="row">{{i+1}}</th>
         <td>{{p.studentName}}</td>
         <td>{{p.prn}}</td>
         <td>{{p.submittedOn | date : 'yyyy/MM/dd hh:mm:ss'  }}</td>

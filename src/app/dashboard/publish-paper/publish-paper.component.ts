@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaperSetterService } from '../../paper-setter.service'
+import { PaperSetterService } from '../../service/paper-setter.service'
 
 @Component({
   selector: 'app-publish-paper',
@@ -8,16 +8,22 @@ import { PaperSetterService } from '../../paper-setter.service'
   styleUrls: ['./publish-paper.component.css']
 })
 export class PublishPaperComponent implements OnInit {
+
   alertError: boolean = false;
   message : string = '';
   paperSetterId: any
-  constructor(private service: PaperSetterService, private router: Router) { }
-
   paper: any[] = [];
+
+  constructor(private service: PaperSetterService, private router: Router) { }
 
   ngOnInit(): void {
     this.paperSetterId = sessionStorage.getItem('paperSetterId');
     this.service.getPapereToBeReviewed(this.paperSetterId).subscribe((result: any) => {
+      if(result.length == 0 )
+      {
+        this.message="No papers to publish";
+        this.alertError =true;
+      }
       for (let index = 0; index < result.length; index++) {
         let element = result[index];
         this.paper.push(element);
