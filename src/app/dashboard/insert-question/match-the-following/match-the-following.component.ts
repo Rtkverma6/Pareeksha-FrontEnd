@@ -124,7 +124,6 @@ export class MatchTheFollowingComponent {
       if(error.error['message'] == NaN){
         alert(error.error['message']);
       }
-
     });
     this.matchTheFollowing.reset();
     sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());

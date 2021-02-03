@@ -52,4 +52,8 @@ export class PaperSetterService {
   downloadPaper(paperId:Number){
     return this.http.get(this.url+'paper/download/'+paperId,this.httpOptions);
   }
+
+  downloadPaperResults(paperId:any){
+    return this.http.get(this.url+'paper/download-result/'+paperId,this.httpOptions);
+  }
 }

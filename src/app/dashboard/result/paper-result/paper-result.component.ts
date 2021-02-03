@@ -32,4 +32,9 @@ export class PaperResultComponent implements OnInit {
   closeAlert() {
     this.alertError = false;
   }
+
+  downloadResult(){
+   let paperId = sessionStorage.getItem('resultsOfPaper');
+    this.service.downloadPaperResults(paperId).subscribe();
+  }
 }

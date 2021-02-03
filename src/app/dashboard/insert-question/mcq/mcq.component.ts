@@ -116,7 +116,8 @@ export class MCQComponent {
       console.log('in total Questions');
       alert('All questions inserted successfully');
       this.router.navigate(['dashboard/publish']);
-    } 
+    }
+    this.router.navigate(['dashboard/question/insert']);
   }
   changeEvent1(event:any){
     if (event.target.checked) {

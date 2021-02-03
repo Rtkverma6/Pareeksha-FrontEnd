@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 import { PaperSetterService } from '../../service/paper-setter.service'
 
 @Component({
@@ -40,13 +41,13 @@ export class PublishPaperComponent implements OnInit {
     sessionStorage.setItem('pageToBeReviewed', paperId);
     this.router.navigate(['dashboard/publish/review']);
   }
-  download(paperId: any) {
-    // sessionStorage.setItem('paperToBeDownloaded', paperId);
-    // this.router.navigate(['dashboard/publish/download']);
-  }
-
+  
   downloadPaper(paperId:any){
-    this.service.downloadPaper(paperId).subscribe();
+    this.service.downloadPaper(paperId).subscribe( null,error =>{
+      console.error();
+      this.message=error.error['message'];
+      this.alertError = true;
+    } );
   }
 
   closeAlert() {
