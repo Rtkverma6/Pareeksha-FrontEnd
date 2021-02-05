@@ -6,9 +6,10 @@ import { FetchPaperComponent } from './fetch-paper/fetch-paper.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularCountdownTimerModule} from 'angular8-countdown-timer';
+import { InstructionsComponent } from './instructions/instructions.component';
 
 @NgModule({
-  declarations: [LoginComponent, PaperLoginComponent, FetchPaperComponent],
+  declarations: [LoginComponent, PaperLoginComponent, FetchPaperComponent, InstructionsComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -115,9 +115,14 @@ export class MCQComponent {
     if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
       console.log('in total Questions');
       alert('All questions inserted successfully');
-      this.router.navigate(['dashboard/publish']);
+      this.router.navigate(['dashboard/publish']).then(()=>{
+        window.location.reload();
+      });;
+    }else{
+      this.router.navigate(['dashboard/question/insert']).then(()=>{
+        window.location.reload();
+      });;
     }
-    this.router.navigate(['dashboard/question/insert']);
   }
   changeEvent1(event:any){
     if (event.target.checked) {

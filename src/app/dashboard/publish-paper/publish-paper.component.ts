@@ -11,7 +11,7 @@ import { PaperSetterService } from '../../service/paper-setter.service'
 export class PublishPaperComponent implements OnInit {
 
   alertError: boolean = false;
-  message : string = '';
+  message: string = '';
   paperSetterId: any
   paper: any[] = [];
 
@@ -20,18 +20,17 @@ export class PublishPaperComponent implements OnInit {
   ngOnInit(): void {
     this.paperSetterId = sessionStorage.getItem('paperSetterId');
     this.service.getPapereToBeReviewed(this.paperSetterId).subscribe((result: any) => {
-      if(result.length == 0 )
-      {
-        this.message="No papers to publish";
-        this.alertError =true;
+      if (result.length == 0) {
+        this.message = "No papers to publish";
+        this.alertError = true;
       }
       for (let index = 0; index < result.length; index++) {
         let element = result[index];
         this.paper.push(element);
       }
-    },error =>{
+    }, error => {
       console.error();
-      this.message=error.error['message'];
+      this.message = error.error['message'];
       this.alertError = true;
     });
     console.log(this.paper);
@@ -41,13 +40,16 @@ export class PublishPaperComponent implements OnInit {
     sessionStorage.setItem('pageToBeReviewed', paperId);
     this.router.navigate(['dashboard/publish/review']);
   }
-  
-  downloadPaper(paperId:any){
-    this.service.downloadPaper(paperId).subscribe( null,error =>{
+
+  downloadPaper(paperId: any) {
+    this.service.downloadPaper(paperId).subscribe(null, error => {
       console.error();
-      this.message=error.error['message'];
-      this.alertError = true;
-    } );
+      if (error.error['message'] != NaN) {
+        this.message = error.error['message'];
+        this.alertError = true;
+      }
+
+    });
   }
 
   closeAlert() {

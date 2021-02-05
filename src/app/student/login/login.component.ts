@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.loginSudent.reset();
-    this.router.navigate(['student/fetchPaper']);
+    this.router.navigate(['student/instructions']);
   }
 
   closeAlert() {

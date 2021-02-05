@@ -86,7 +86,7 @@ export class CreatePaperComponent {
       sessionStorage.setItem('paperId', result['paperId']);
       sessionStorage.setItem('paperSubject', result['paperSubject']);
       sessionStorage.setItem('totalQuestions', result['totalQuestions'])
-      alert('Paper created Successfully. Please Insert Questions now');
+      alert('Paper created Successfully.\n Attention please Note down your Paper Id : '+result['paperId']+'\n Please Insert Questions now');
       this.router.navigate(['dashboard/question/insert']);
     }, (error) => {
       console.error();

@@ -65,7 +65,9 @@ export class ReviewComponent implements OnInit {
     this.paperSetterService.updatePaperStatus(this.paperId).subscribe((result) => {
       console.log(result);
     });
-    this.router.navigate(['dashboard/publish']);
+    this.router.navigate(['dashboard/publish']).then(()=>{
+      window.location.reload();
+    });
   }
 
   closeAlert() {

@@ -178,8 +178,9 @@ export class FetchPaperComponent implements OnInit {
       console.log(" Submitting Toatal Marks Obtained" + this.marksObtained);
 
       //Calling service to store result
-      this.service.storeResult(this.paperResult).subscribe(error => {
+      this.service.storeResult(this.paperResult).subscribe(null,error => {
         console.error();
+        this.message = error.error['message'];
         this.alertError = true;
       });
       alert('Paper Submitted Successfully');
