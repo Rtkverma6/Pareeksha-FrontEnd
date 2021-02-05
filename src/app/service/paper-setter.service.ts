@@ -56,4 +56,8 @@ export class PaperSetterService {
   downloadPaperResults(paperId:any){
     return this.http.get(this.url+'paper/download-result/'+paperId,this.httpOptions);
   }
+
+  forgotPassword(data : any){
+    return this.http.post(this.url+'papersetter/forgot-password',data);
+  }
 }

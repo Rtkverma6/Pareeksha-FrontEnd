@@ -12,12 +12,14 @@ import { PageNotFoundComponent } from './error-handler/page-not-found.component'
 import { StudentModule } from './student/student.module';
 import { HomeModule } from "./home/home.module";
 import { SessionComponent } from './session/session.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     SessionComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
