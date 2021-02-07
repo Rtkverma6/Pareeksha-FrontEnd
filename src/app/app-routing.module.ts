@@ -1,9 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './error-handler/page-not-found.component';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { ContactUsComponent } from './footer/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 
 
 const routes: Routes = [
+  {
+    path:'footer/aboutUs',
+    component:AboutUsComponent
+  },
+  {
+    path:'footer/contactUs',
+    component:ContactUsComponent
+  },
+  {
+    path:'footer/privacyPolicy',
+    component:PrivacyPolicyComponent
+  },
   {
     path: 'paperSetter',
     loadChildren: () =>

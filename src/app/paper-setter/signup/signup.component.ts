@@ -11,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
-  constructor(private service: PaperSetterService,private router:Router) { }
-  
+  error: any = { isError: false, errorMessage: '' };
+  flag: boolean = false;
+
+  constructor(private service: PaperSetterService, private router: Router) { }
+
   registerUser = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
@@ -21,8 +24,24 @@ export class SignupComponent {
       Validators.minLength(8),
       Validators.maxLength(15),
     ]),
-    dob: new FormControl(''),
+    dob: new FormControl('', [Validators.required]),
   });
+
+  compareDate() {
+    console.log('In compareDate()');
+    console.log(new Date(Date.now()));
+    var date = new Date(Date.now());
+    var dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+      .toISOString()
+      .split("T")[0];
+
+    console.log(dateString);
+    if ((this.registerUser.controls['dob'].value > dateString)) {
+      console.log('wrong value');
+      this.error = { isError: true, errorMessage: 'Date of birth greater than current date' };
+      this.flag = true;
+    }
+  }
 
   get name() {
     return this.registerUser.get('name');
@@ -39,17 +58,21 @@ export class SignupComponent {
 
   collectData() {
     console.log(this.registerUser.value);
-    this.service
-      .registerPaperSetter(this.registerUser.value)
-      .subscribe((result) => {
-        console.log('result', result);
-        alert("Registration Successfull");
-        this.router.navigate(['paperSetter/login']);
-      }, error => {
-        alert(error.error['message']);
-      });
-
-    this.registerUser.reset();
+    this.compareDate();
+    console.log(this.registerUser.controls['dob'].value);
+    if (this.flag == false) {
+      this.service
+        .registerPaperSetter(this.registerUser.value)
+        .subscribe((result) => {
+          console.log('result', result);
+          alert("Registration Successfull");
+          this.router.navigate(['paperSetter/login']);
+        }, error => {
+          alert(error.error['message']);
+        });
+      this.registerUser.reset();
+    }
+    this.flag =false;
   }
 
 }

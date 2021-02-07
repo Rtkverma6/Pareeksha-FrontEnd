@@ -23,6 +23,9 @@
     <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="alert alert-danger">
       <div *ngIf="dob.errors.required"> Date of Birth is required. </div>
     </div>
+    <div *ngIf="error.isError" class="alert alert-danger">
+      {{ error.errorMessage }}
+   </div>
   </div>
 
   <div class="form-group">

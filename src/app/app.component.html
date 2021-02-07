@@ -15,7 +15,10 @@
                     routerLink="dashboard/create">Create Paper</a> </li>
             <li class="nav-item"> <a *ngIf="session.isLoggedIn()" class="nav-link navbar-text"
                     routerLink="dashboard/publish">Publish Paper</a> </li>
-            <li class="nav-item" style="margin-left: 850px;"> <a *ngIf="session.isLoggedIn()" (click)="logout()"
+            <li class="nav-item"> <a *ngIf="session.isLoggedIn()" class="nav-link navbar-text"
+                        routerLink="dashboard/papersetterDashboard">Dashboard</a> </li>
+                
+            <li class="nav-item" style="margin-left: 750px;"> <a *ngIf="session.isLoggedIn()" (click)="logout()"
                     class="nav-link navbar-text" routerLink="paperSetter/logout">Logout</a> </li>
         </ul>
     </div>

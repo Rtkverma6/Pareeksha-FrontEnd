@@ -13,13 +13,19 @@ import { StudentModule } from './student/student.module';
 import { HomeModule } from "./home/home.module";
 import { SessionComponent } from './session/session.component';
 import { FooterComponent } from './footer/footer.component';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { ContactUsComponent } from './footer/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     SessionComponent,
-    FooterComponent
+    FooterComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

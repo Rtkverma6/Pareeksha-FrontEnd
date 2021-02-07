@@ -21,7 +21,7 @@ export class ForgotPasswordComponent{
       Validators.minLength(8),
       Validators.maxLength(15),
     ]),
-    dob: new FormControl(''),
+    dob: new FormControl('', [Validators.required]),
   });
 
   get password() {
@@ -46,7 +46,7 @@ export class ForgotPasswordComponent{
           this.flag = true;          
         }
         else{
-          alert("Registration Successfull");
+          alert("Password updated Successfully");
           this.router.navigate(['paperSetter/login']);
         }
       });

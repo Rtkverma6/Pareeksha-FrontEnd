@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class CreatePaperComponent {
 
+  error: any = { isError: false, errorMessage: '' };
+  flag: boolean = false;
+
   constructor(private service: DashboardService, private router: Router) { }
 
   message: string = '';
@@ -51,6 +54,17 @@ export class CreatePaperComponent {
     ]),
   });
 
+  compareDate() {
+    console.log('In compareDate()');
+    console.log(this.createPaper.controls['startDate'].value);
+    console.log(this.createPaper.controls['endDate'].value);
+    if ((this.createPaper.controls['startDate'].value > this.createPaper.controls['endDate'].value)) {
+      console.log('wrong value');
+      this.error = { isError: true, errorMessage: 'Start date should be less than End date' };
+      this.flag = true;
+    }
+  }
+
   get paperName() {
     return this.createPaper.get('paperName');
   }
@@ -81,17 +95,22 @@ export class CreatePaperComponent {
 
   collectData() {
     console.log(this.createPaper.value);
-    this.service.createPaper(this.createPaper.value).subscribe((result) => {
-      console.log('result : ', result);
-      sessionStorage.setItem('paperId', result['paperId']);
-      sessionStorage.setItem('paperSubject', result['paperSubject']);
-      sessionStorage.setItem('totalQuestions', result['totalQuestions'])
-      alert('Paper created Successfully.\n Attention please Note down your Paper Id : '+result['paperId']+'\n Please Insert Questions now');
-      this.router.navigate(['dashboard/question/insert']);
-    }, (error) => {
-      console.error();
-      alert(error.error['message']);
-    });
-    this.createPaper.reset();
+    this.compareDate();
+    if (this.flag == false) {
+      this.service.createPaper(this.createPaper.value).subscribe((result) => {
+        console.log('result : ', result);
+        sessionStorage.setItem('paperId', result['paperId']);
+        sessionStorage.setItem('paperSubject', result['paperSubject']);
+        sessionStorage.setItem('totalQuestions', result['totalQuestions'])
+        alert('Paper created Successfully.\n Attention please Note down your Paper Id : ' + result['paperId'] + '\n Please Insert Questions now');
+        this.router.navigate(['dashboard/question/insert']);
+      }, (error) => {
+        console.error();
+        alert(error.error['message']);
+      });
+      this.createPaper.reset();
+    }
+    console.log("After if ");
+    this.flag =false;
   }
 }

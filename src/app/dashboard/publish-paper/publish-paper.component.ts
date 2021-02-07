@@ -42,14 +42,7 @@ export class PublishPaperComponent implements OnInit {
   }
 
   downloadPaper(paperId: any) {
-    this.service.downloadPaper(paperId).subscribe(null, error => {
-      console.error();
-      if (error.error['message'] != NaN) {
-        this.message = error.error['message'];
-        this.alertError = true;
-      }
-
-    });
+    this.service.downloadPaper(paperId).subscribe();
   }
 
   closeAlert() {

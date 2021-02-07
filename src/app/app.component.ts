@@ -19,6 +19,7 @@ export class AppComponent implements OnInit{
   //   this.currentUser = localStorage.getItem('currentUser');
   // }
   ngOnInit(): void {
+    console.log("In app.component");
     this.session = new SessionComponent();
   }
 

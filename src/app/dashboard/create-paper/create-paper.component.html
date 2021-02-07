@@ -27,7 +27,7 @@
       <option *ngFor="let difficultyLevel of level" [ngValue]="difficultyLevel">{{difficultyLevel}}</option>
     </select>
   </div>
-  
+
 
   <div class="form-group">
     <label for="startDate">Start Date</label>
@@ -42,6 +42,9 @@
     <input type="datetime-local" class="form-control" id="endDate" formControlName="endDate">
     <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
       <div *ngIf="endDate.errors.required"> End Date is required. </div>
+    </div>
+    <div *ngIf="error.isError" class="alert alert-danger">
+      {{ error.errorMessage }}
     </div>
   </div>
 
@@ -72,11 +75,11 @@
   </div>
 
   <div class="form-group">
-  <label for="totalQuestions">Total Number of Questions</label>
-  <input type="number" class="form-control" id="totalQuestions" formControlName="totalQuestions">
-  <div *ngIf="totalQuestions.invalid && (totalQuestions.dirty || totalQuestions.touched)" class="alert alert-danger">
-    <div *ngIf="totalQuestions.errors.required"> Total Number of Questions are required. </div>
-  </div>
+    <label for="totalQuestions">Total Number of Questions</label>
+    <input type="number" class="form-control" id="totalQuestions" formControlName="totalQuestions">
+    <div *ngIf="totalQuestions.invalid && (totalQuestions.dirty || totalQuestions.touched)" class="alert alert-danger">
+      <div *ngIf="totalQuestions.errors.required"> Total Number of Questions are required. </div>
+    </div>
   </div>
 
   <button type="submit" class="btn btn-primary" [ngClass]="{'my-color': !createPaper.valid}"
