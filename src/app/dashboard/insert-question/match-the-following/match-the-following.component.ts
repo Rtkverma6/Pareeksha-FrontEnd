@@ -13,6 +13,8 @@ import { IQuestion } from '../../../../model/IQuestion';
 })
 export class MatchTheFollowingComponent {
 
+  error: any = { isError: false, errorMessage: '' };
+  flag: boolean = false;
   paperSubject: string = sessionStorage.getItem('paperSubject');
   isCheck1:boolean = true;
   isCheck2:boolean = true;
@@ -76,6 +78,24 @@ export class MatchTheFollowingComponent {
   }
 
   addChoices() {
+    let trueChoices: number = 0;
+
+    if (this.matchTheFollowing.value.isCorrect1 == true) {
+      ++trueChoices;
+    }
+    if (this.matchTheFollowing.value.isCorrect2 == true) {
+      ++trueChoices;
+    }
+    if (this.matchTheFollowing.value.isCorrect3 == true) {
+      ++trueChoices;
+    }
+    if (this.matchTheFollowing.value.isCorrect4 == true) {
+      ++trueChoices;
+    }
+    if (trueChoices > 1) {
+      this.flag = true;
+      return;
+    }
     this.choiceObject = {
       choice: this.matchTheFollowing.value.choice1,
       isCorrect: this.matchTheFollowing.value.isCorrect1
@@ -117,30 +137,36 @@ export class MatchTheFollowingComponent {
     this.questionObject.points = this.matchTheFollowing.value.points;
     this.addChoices();
 
-    this.service.addQuestion(this.questionObject).subscribe((result) => {
-      console.log(result);
-     
-    }, error => {
-      if(error.error['message'] == NaN){
-        alert(error.error['message']);
+    if (this.flag == false) {
+      this.service.addQuestion(this.questionObject).subscribe((result) => {
+        console.log(result);
+       
+      }, error => {
+        if(error.error['message'] == NaN){
+          alert(error.error['message']);
+        }
+      });
+      this.matchTheFollowing.reset();
+      sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+      alert('Question Inserted');
+      this.questionObject.choices = [];
+  
+      if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+        console.log('in total Questions');
+        alert('All questions inserted successfully');
+        this.router.navigate(['dashboard/publish']).then(()=>{
+          window.location.reload();
+        });;
+      }else{
+        this.router.navigate(['dashboard/question/insert']).then(()=>{
+          window.location.reload();
+        });;
       }
-    });
-    this.matchTheFollowing.reset();
-    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
-    alert('Question Inserted');
-    this.questionObject.choices = [];
-
-    if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
-      console.log('in total Questions');
-      alert('All questions inserted successfully');
-      this.router.navigate(['dashboard/publish']).then(()=>{
-        window.location.reload();
-      });;
     }else{
-      this.router.navigate(['dashboard/question/insert']).then(()=>{
-        window.location.reload();
-      });;
+      this.error = { isError: true, errorMessage: 'Only one correct option allowed' };
+      this.flag = false;
     }
+    
     
   }
   changeEvent1(event:any){

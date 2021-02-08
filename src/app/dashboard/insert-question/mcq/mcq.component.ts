@@ -13,13 +13,15 @@ import { IChoice } from '../../../../model/IChoice';
 })
 export class MCQComponent {
 
-  constructor(private service: DashboardService, private router: Router) { }
+  error: any = { isError: false, errorMessage: '' };
 
-  isCheck1:boolean = true;
-  isCheck2:boolean = true;
-  isCheck3:boolean = true;
-  isCheck4:boolean = true;
-  
+  constructor(private service: DashboardService, private router: Router) { }
+  flag: boolean = false;
+  isCheck1: boolean = true;
+  isCheck2: boolean = true;
+  isCheck3: boolean = true;
+  isCheck4: boolean = true;
+
   questionObject: IQuestion = {
     paperId: 0,
     question: '',
@@ -66,6 +68,24 @@ export class MCQComponent {
   }
 
   addChoices() {
+    let trueChoices: number = 0;
+
+    if (this.insertQuestion.value.isCorrect1 == true) {
+      ++trueChoices;
+    }
+    if (this.insertQuestion.value.isCorrect2 == true) {
+      ++trueChoices;
+    }
+    if (this.insertQuestion.value.isCorrect3 == true) {
+      ++trueChoices;
+    }
+    if (this.insertQuestion.value.isCorrect4 == true) {
+      ++trueChoices;
+    }
+    if (trueChoices > 1) {
+      this.flag = true;
+      return;
+    }
     this.choiceObject = {
       choice: this.insertQuestion.value.choice1,
       isCorrect: this.insertQuestion.value.isCorrect1
@@ -96,62 +116,68 @@ export class MCQComponent {
     this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();
-    this.service
-      .addQuestion(this.questionObject)
-      .subscribe((result) => {
-        console.log('result', result);
-      }, error => {
-        if(error.error['message'] == NaN){
-          alert(error.error['message']);
+    if (this.flag == false) {
+      this.service
+        .addQuestion(this.questionObject)
+        .subscribe((result) => {
+          console.log('result', result);
+        }, error => {
+          if (error.error['message'] == NaN) {
+            alert(error.error['message']);
+          }
         }
-      }
-      );
-    this.insertQuestion.reset();
-    
-    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
-    alert('Question Inserted');
-    this.questionObject.choices = [];
+        );
+      this.insertQuestion.reset();
 
-    if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
-      console.log('in total Questions');
-      alert('All questions inserted successfully');
-      this.router.navigate(['dashboard/publish']).then(()=>{
-        window.location.reload();
-      });;
+      sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+      alert('Question Inserted');
+      this.questionObject.choices = [];
+
+      if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+        console.log('in total Questions');
+        alert('All questions inserted successfully');
+        this.router.navigate(['dashboard/publish']).then(() => {
+          window.location.reload();
+        });;
+      } else {
+        this.router.navigate(['dashboard/question/insert']).then(() => {
+          window.location.reload();
+        });;
+      }
     }else{
-      this.router.navigate(['dashboard/question/insert']).then(()=>{
-        window.location.reload();
-      });;
+      this.error = { isError: true, errorMessage: 'Only one correct option allowed' };
+      this.flag = false;
     }
+
   }
-  changeEvent1(event:any){
+  changeEvent1(event: any) {
     if (event.target.checked) {
       this.isCheck1 = false;
     }
     else {
-         this.isCheck1= true;
+      this.isCheck1 = true;
     }
   }
-  changeEvent2(event:any){
+  changeEvent2(event: any) {
     if (event.target.checked) {
       this.isCheck2 = false;
     }
     else {
-         this.isCheck2= true;
+      this.isCheck2 = true;
     }
-  }changeEvent3(event:any){
+  } changeEvent3(event: any) {
     if (event.target.checked) {
       this.isCheck3 = false;
     }
     else {
-         this.isCheck3= true;
+      this.isCheck3 = true;
     }
-  }changeEvent4(event:any){
+  } changeEvent4(event: any) {
     if (event.target.checked) {
       this.isCheck4 = false;
     }
     else {
-         this.isCheck4= true;
+      this.isCheck4 = true;
     }
   }
 }

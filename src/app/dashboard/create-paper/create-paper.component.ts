@@ -56,13 +56,25 @@ export class CreatePaperComponent {
 
   compareDate() {
     console.log('In compareDate()');
-    console.log(this.createPaper.controls['startDate'].value);
-    console.log(this.createPaper.controls['endDate'].value);
-    if ((this.createPaper.controls['startDate'].value > this.createPaper.controls['endDate'].value)) {
+    console.log(new Date(Date.now()));
+    var date = new Date(Date.now());
+    var dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+      .toISOString()
+      .split("T")[0];
+    if ((this.createPaper.controls['endDate'].value < dateString)) {
       console.log('wrong value');
-      this.error = { isError: true, errorMessage: 'Start date should be less than End date' };
+      this.error = { isError: true, errorMessage: 'End Date of paper should be greater than current date' };
       this.flag = true;
+    } else {
+      console.log(this.createPaper.controls['startDate'].value);
+      console.log(this.createPaper.controls['endDate'].value);
+      if ((this.createPaper.controls['startDate'].value > this.createPaper.controls['endDate'].value)) {
+        console.log('wrong value');
+        this.error = { isError: true, errorMessage: 'Start date should be less than End date' };
+        this.flag = true;
+      }
     }
+
   }
 
   get paperName() {
@@ -111,6 +123,6 @@ export class CreatePaperComponent {
       this.createPaper.reset();
     }
     console.log("After if ");
-    this.flag =false;
+    this.flag = false;
   }
 }

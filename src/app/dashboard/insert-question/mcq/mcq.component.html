@@ -80,6 +80,9 @@
   <div *ngIf="choice4.invalid && (choice4.dirty || choice4.touched)" class="alert alert-danger">
     <div *ngIf="choice4.errors.required"> Please provide choice </div>
   </div>
+  <div *ngIf="error.isError" class="alert alert-danger">
+    {{ error.errorMessage }}
+ </div>
 
   <button type="submit" class="btn btn-primary" [ngClass]="{'my-color': !insertQuestion.valid}"
     [disabled]="!insertQuestion.valid || (isCheck1 && isCheck2 && isCheck3 && isCheck4) ">Insert</button>

@@ -41,7 +41,7 @@
       <td><input type="text" class="form-control" name="m" id="m" formControlName="m" required></td>
     </tr>
   </table> <br>
-  <h5>Choices ( Check atleast one correct answer )</h5>
+  <h5>Choices</h5>
   <table class="table">
     <tr>
       <th width="5%" ></th>
@@ -72,5 +72,8 @@
       </td>
     </tr>
   </table>
+  <div *ngIf="error.isError" class="alert alert-danger">
+    {{ error.errorMessage }}
+ </div>
   <button type="submit" class="btn btn-primary" [disabled]="!matchTheFollowing.valid || (isCheck1 && isCheck2 && isCheck3 && isCheck4) ">Insert</button>
 </form>

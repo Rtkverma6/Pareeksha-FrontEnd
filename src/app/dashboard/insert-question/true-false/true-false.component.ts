@@ -15,16 +15,16 @@ import { IChoice } from '../../../../model/IChoice';
 export class TrueFalseComponent {
 
   paperSubject: string = sessionStorage.getItem('paperSubject');
-  toggleInsert:boolean = true;
+  toggleInsert: boolean = true;
 
   constructor(private service: DashboardService, private router: Router) { }
 
   questionObject: IQuestion = {
-    paperId:0,
+    paperId: 0,
     question: '',
     points: 0,
     choices: [],
-    questionType : "TRUEORFALSE"
+    questionType: "TRUEORFALSE"
   }
 
   choiceObject: IChoice = {
@@ -64,40 +64,41 @@ export class TrueFalseComponent {
 
   collectData() {
     this.questionObject.paperId = sessionStorage.getItem('paperId').valueOf(),
-    this.questionObject.question = this.insertQuestion.value.question;
+      this.questionObject.question = this.insertQuestion.value.question;
     this.questionObject.points = this.insertQuestion.value.points;
     this.addChoices();
     this.service
       .addQuestion(this.questionObject)
       .subscribe((result) => {
         console.log('result', result);
-        
+
       }, error => {
-        if(error.error['message'] == NaN){
+        if (error.error['message'] == NaN) {
           alert(error.error['message']);
         }
       });
-      this.insertQuestion.reset();
-        sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
-      alert('Question Inserted');
-      if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
-        console.log('in total Questions');
-        alert('All questions inserted successfully');
-        this.router.navigate(['dashboard/publish']).then(()=>{
-          window.location.reload();
-        });;
-      }else{
-        this.router.navigate(['dashboard/question/insert']).then(()=>{
-          window.location.reload();
-        });;
-      }
+    this.insertQuestion.reset();
+    sessionStorage.setItem('totalQuestions', (Number(sessionStorage.getItem('totalQuestions')) - 1).toString());
+    alert('Question Inserted');
+    if (Number(sessionStorage.getItem('totalQuestions')) == 0) {
+      console.log('in total Questions');
+      alert('All questions inserted successfully');
+      this.router.navigate(['dashboard/publish']).then(() => {
+        window.location.reload();
+      });;
+    } else {
+      this.router.navigate(['dashboard/question/insert']).then(() => {
+        window.location.reload();
+      });;
+    }
+
   }
-  changeEvent(event){
+  changeEvent(event) {
     if (event.target.checked) {
       this.toggleInsert = !this.toggleInsert;
     }
     else {
-         this.toggleInsert= !this.toggleInsert;
+      this.toggleInsert = !this.toggleInsert;
     }
   }
 }
